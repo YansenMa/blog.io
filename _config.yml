@@ -22,7 +22,7 @@ google_analytics: # Enter your tracking ID. Not available on IPFS
 
 twitter_cards: off # Not available on IPFS. /assets/logo.png required
 twitter_username: 
-github_username: YansenMa
+github_username: yansen.ma@outlook.com
 
 # Build settings
 markdown: kramdown
