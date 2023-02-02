@@ -13,7 +13,7 @@ Working on production, checkout, commit and push from local prod, not the `origi
 Solution:
 
 
-```console
+```shell
 
 git log -2 # get lastest 2 commits id
 git checkout origin prod # checkout remote prod
