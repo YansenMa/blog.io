@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title:  "My Network Note"
@@ -7,7 +6,7 @@ mathjax: on
 ---
 
 # Network
-[network command]{2023-02-01-my-linux-notes.md}
+[network command](2023-02-01-my-linux-notes.md)
 
 what are Ip address? 
 
