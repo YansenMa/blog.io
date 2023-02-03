@@ -2,12 +2,13 @@
 ---
 layout: post
 title:  "My Network Note"
-tags: git 
+tags: network 
 mathjax: on
 ---
 
 # Network
-[network command]{../linux/2023-02-01-my-linux-notes.md}
+[network command]{2023-02-01-my-linux-notes.md}
+
 what are Ip address? 
 
 Here is an example of a 32-bit address in binary format: \n
