@@ -71,6 +71,9 @@ netstat -l
 netsat -tunlp | grep ${port}
 
 
+# check port usage 
+isof -i:${port}
+
 ```
 
 
