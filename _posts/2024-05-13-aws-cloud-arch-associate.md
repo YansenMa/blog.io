@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Amazon Cloud Architect Associate"
+tags: aws 
+---
+
+
 # AWS  
 The syntax of the command is incorrect.
 - [AWS](#aws)
