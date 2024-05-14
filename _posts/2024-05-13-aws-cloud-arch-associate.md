@@ -259,6 +259,7 @@ Secure, durable, high-scalable object storage.
   * Buckets are private by default - you have to allow public accesss on both **bucket** and **objects** in order to make the bucket public
   * Object ACLs - you can make **individual objects** public using object ACLs [Controlling Subnet Traffic with Network ACLs](#controlling-subnet-traffic-with-network-acls)
   * Bucket Policies - you can make **entire buckets** public using bucket policies
+* Lifecycle Management - it allows to move your object in different tiers depending on the activity and time windows to save up money. It also can be used to configre expiration. e.g., change current vison to different storage tier, or permanently delete noncurrent versions of objects
 * S3 can be used as static web hosting**
   1. Static Content - use S3 to host static content only (not dynamic)
   2. Bucket Policies - make entire buckets public using bucket policies 
@@ -270,8 +271,20 @@ Secure, durable, high-scalable object storage.
   4. Lifecycle Rules - can be integratdd with lifecyle rules
   5. Supports MFA
 * S3 storage Classes tires (come up an awful lot in the exam)
-| storage class | availability and durability | AZs | use Case |
-|   ---          | 
+  * S3 IA (Infrequent Access) - infrequently accessed but requires rapid access. Lower fee than standard, but you are charged for retrieval fee
+  * S3 OZ (One Zone) - Infrequently Accessed and do not require the multiple AZs, lowest option
+  * S3 Intelligent Tiering - Use Machine learning to configure the objects around storage classes to the most cost-effective option
+  * S3 Glacier - for data archiving. Secure, durable, low-cost storage. Retrieval time configurable from mins to hours
+  * S3 Glacier Deep Archive: same as above but retrieval times of 12 hours
+
+| Storage Class                 | Availability and Durability              | AZs | Use Case                                                                                                                   |
+|-------------------------------|------------------------------------------|-----|----------------------------------------------------------------------------------------------------------------------------|
+| S3 Standard                   | 11 9's Availability and Durability       | >=3 | Suitable for most workloads  e.g., websites, content distribution, mobile, gaming applications and bigdata analytics       |
+| S3 Standard-Infrequent Access | 11 9's Availability and Durability       | >=3 | Long-term, infrequently accessed critical data (e.g., backups, data store for disaster recovery files, etc)                |
+| S3 One Zone-Infrequent Access | 99.5% Availability and 11 9's Durability | 1   | Long-term, infrequently accessed, non-critical data                                                                        |
+| S3 Glacier                    | 11 9's Availability and Durability       | >=3 | Long-term data archiving that occasionally needs to be accessed within a few hours or mins                                 |
+| S3 Glacier Deep Archive       | 11 9's Availability and Durability       | >=3 | Rarely accessed data archiving with a default retrieval time of 12 hours (e.g., financial records for regulatory purposes) |
+| S3 Intelligent-Tiering        | 11 9's Availability and Durability       | >=3 | Unknown or unpredictable access pattern                                                                                    |
 
 
 
