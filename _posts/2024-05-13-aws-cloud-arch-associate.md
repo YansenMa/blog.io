@@ -5,8 +5,9 @@ tags: aws
 ---
 - [AWS Fundamentals](#aws-fundamentals)
 - [(IAM) Identity and Access Management](#iam-identity-and-access-management)
-  - [Summary](#summary)
+  - [Chapter Summary](#chapter-summary)
 - [S3](#s3)
+  - [Chapter Summary](#chapter-summary-1)
   - [S3 lifecycles](#s3-lifecycles)
   - [S3 Lock](#s3-lock)
   - [S3 Encryption](#s3-encryption)
@@ -71,7 +72,7 @@ tags: aws
   - [Simple Notification Service (SNS)](#simple-notification-service-sns)
   - [API GW](#api-gw)
 - [Big Data](#big-data)
-  - [Summary](#summary-1)
+  - [Summary](#summary)
   - [Redshift](#redshift)
   - [EMR （Elastic MapReduce）](#emr-elastic-mapreduce)
   - [Kinesis](#kinesis)
@@ -115,21 +116,21 @@ tags: aws
   - [Network firewall](#network-firewall)
   - [Secuirty Hub](#secuirty-hub)
 - [Automation](#automation)
-  - [Summary](#summary-2)
+  - [Summary](#summary-1)
   - [CloudFormation](#cloudformation)
   - [Elasticbeanstalk (high level knowledge)](#elasticbeanstalk-high-level-knowledge)
   - [Systems Manager (Important)](#systems-manager-important)
 - [Caching](#caching)
-  - [Summary](#summary-3)
+  - [Summary](#summary-2)
   - [CloudFront](#cloudfront)
   - [ElasticCache \& DAX](#elasticcache--dax)
-    - [Summary](#summary-4)
+    - [Summary](#summary-3)
   - [Global Accelerator](#global-accelerator)
-    - [Summary](#summary-5)
+    - [Summary](#summary-4)
 - [Governance](#governance)
-  - [Summary](#summary-6)
+  - [Summary](#summary-5)
   - [AWS Organization](#aws-organization)
-    - [Summary](#summary-7)
+    - [Summary](#summary-6)
   - [AWS Resource Access Manager (RAM)](#aws-resource-access-manager-ram)
   - [AWS Cross-account role Access](#aws-cross-account-role-access)
   - [AWS Config](#aws-config)
@@ -140,42 +141,42 @@ tags: aws
   - [AWS Compute Optimizer](#aws-compute-optimizer)
   - [AWS Trusted Advisor](#aws-trusted-advisor)
   - [AWS Control Tower](#aws-control-tower)
-    - [Summary](#summary-8)
+    - [Summary](#summary-7)
   - [AWS License manager](#aws-license-manager)
   - [AWS Health dashboard](#aws-health-dashboard)
   - [AWS Service Catalog \& AWS Proton](#aws-service-catalog--aws-proton)
   - [AWS Well-Architected Framewaork (important)](#aws-well-architected-framewaork-important)
-    - [Summary](#summary-9)
+    - [Summary](#summary-8)
 - [Migration](#migration)
-  - [Summary](#summary-10)
+  - [Summary](#summary-9)
   - [Snow family](#snow-family)
-    - [Summary](#summary-11)
+    - [Summary](#summary-10)
   - [Storage Gateway](#storage-gateway)
-    - [Summary](#summary-12)
+    - [Summary](#summary-11)
   - [Data Sync](#data-sync)
-    - [Summary](#summary-13)
+    - [Summary](#summary-12)
   - [AWS Transfer Family](#aws-transfer-family)
-    - [Summary](#summary-14)
+    - [Summary](#summary-13)
   - [AWS Migration Hub](#aws-migration-hub)
-    - [Summary](#summary-15)
+    - [Summary](#summary-14)
   - [AWS Application Discovery Service \& AWS Application migration Service (MGN)](#aws-application-discovery-service--aws-application-migration-service-mgn)
   - [AWS Database Migration Service (DMS)](#aws-database-migration-service-dms)
-    - [Summary](#summary-16)
+    - [Summary](#summary-15)
   - [Migration hub + server migration service (SMS)](#migration-hub--server-migration-service-sms)
 - [Front-End Web and Mobile](#front-end-web-and-mobile)
-  - [Summary](#summary-17)
+  - [Summary](#summary-16)
   - [AWS Amplify](#aws-amplify)
   - [AWS Device Farm](#aws-device-farm)
   - [Amaaon Pinpoint](#amaaon-pinpoint)
 - [Machine Learning](#machine-learning)
-  - [Summary](#summary-18)
+  - [Summary](#summary-17)
   - [Analyzing Text using Amazon Comprehend, amazon Kendra, and Amazon Textract](#analyzing-text-using-amazon-comprehend-amazon-kendra-and-amazon-textract)
   - [Predicting Time-series Data using Amazon Forecast](#predicting-time-series-data-using-amazon-forecast)
   - [Protecting Accounts with Amazon Fraud Detector](#protecting-accounts-with-amazon-fraud-detector)
   - [Working with Text and Speed Using Amazon Polly, Amazon Transcribe and Amazon Lex](#working-with-text-and-speed-using-amazon-polly-amazon-transcribe-and-amazon-lex)
   - [Analyzing Images via Amazon Rekognition (important)](#analyzing-images-via-amazon-rekognition-important)
   - [Amazon SageMaker to Train Learning Models](#amazon-sagemaker-to-train-learning-models)
-    - [Summary](#summary-19)
+    - [Summary](#summary-18)
   - [Amazon Translate](#amazon-translate)
 - [Media (not in the exam yet)](#media-not-in-the-exam-yet)
 - [Summary overall](#summary-overall)
@@ -211,7 +212,7 @@ Key Services to Know
 ---
 ## (IAM) Identity and Access Management 
 
-### Summary
+### Chapter Summary
 IAM manages users and their level of access to AWS console. the basics:   
 
 1. IAM Policy Document - should be able to read
@@ -242,9 +243,37 @@ User can be organised in Groups of people. Policy is a set of JSON documents wit
 
 ---
 ## S3
-universal namespace - all AWS accounts share the S3 namespace. Each S3 bucket names is globally unique.
+Secure, durable, high-scalable object storage. 
 
-S3 URLs - https://**bucke-name**.s3.region.amazonaws.com/key-name
+### Chapter Summary
+* Object based 
+  * Key: An object is a key (the name), 
+  * Value (the content of the file in bytes)
+  * a version ID (important for versioning)
+  * some metadata and other subresources (like access control lists and torrent).
+* Files can be from 0 Bytes to 5 TB
+* There is unlimited storage
+* S3 is universal namespace- all AWS accounts share the S3 namespace. Each S3 bucket names is globally unique.
+  * S3 URLs - https://**bucke-name**.s3.region.amazonaws.com/key-name
+* Security
+  * Buckets are private by default - you have to allow public accesss on both **bucket** and **objects** in order to make the bucket public
+  * Object ACLs - you can make **individual objects** public using object ACLs [Controlling Subnet Traffic with Network ACLs](#controlling-subnet-traffic-with-network-acls)
+  * Bucket Policies - you can make **entire buckets** public using bucket policies
+* S3 can be used as static web hosting**
+  1. Static Content - use S3 to host static content only (not dynamic)
+  2. Bucket Policies - make entire buckets public using bucket policies 
+  3. Automatic Scalling: s3 scales automatically with demand.
+* S3 versioning: keep obj save**
+  1. All versions - all versions of an object are stored in s3. this includes all writes and even if you delete an object.
+  2. Backup - can be a greate backup tool
+  3. Cannot be disabled - once enabled, versioning cannot be disabled, only suspended.
+  4. Lifecycle Rules - can be integratdd with lifecyle rules
+  5. Supports MFA
+* S3 storage Classes tires (come up an awful lot in the exam)
+| storage class | availability and durability | AZs | use Case |
+|   ---          | 
+
+
 
 **S3 Standard**
 1. high avilabiltiy and durability
@@ -257,18 +286,6 @@ S3 URLs - https://**bucke-name**.s3.region.amazonaws.com/key-name
 2. Access control list (ACLs)
 3. Bucket Polices
 
-
-**S3 can be used as static web hosting**
-1. Static Content - use S3 to host static content only (not dynamic)
-2. Bucket Policies - make entire buckets public using bucket policies 
-3. Automatic Scalling: s3 scales automatically with demand.
-
-**S3 versioning: keep obj save**
-1. All versions - all versions of an object are stored in s3. this includes all writes and even if you delete an object.
-2. Backup - can be a greate backup tool
-3. Cannot be disabled - once enabled, versioning cannot be disabled, only suspended.
-4. Lifecycle Rules - can be integratdd with lifecyle rules
-5. Supports MFA
 
 **S3 storage tiers**
 1. S3 standard - >=3 AZ(s), suitable for most workloads.
