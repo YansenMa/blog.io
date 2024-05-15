@@ -13,7 +13,9 @@ tags: aws
   - [S3 Encryption](#s3-encryption)
   - [Optimizing S3 Performance](#optimizing-s3-performance)
   - [S3 Cross Region Replication](#s3-cross-region-replication)
+  - [S3 Transfer Acceleration](#s3-transfer-acceleration)
 - [Elastic Compute Cloud (EC2)](#elastic-compute-cloud-ec2)
+  - [Chapter Summary](#chapter-summary-2)
   - [Pricing options](#pricing-options)
   - [AWS Commandline](#aws-commandline)
   - [Roles](#roles)
@@ -289,6 +291,7 @@ Secure, durable, high-scalable object storage.
 * S3 [Encryption](#s3-encryption)
 * S3 Performance [Optimization](#optimizing-s3-performance)
 * S3 [Replication](#s3-cross-region-replication)
+* S3 [Transfer Acceleration](#s3-transfer-acceleration)
 
 **S3 Standard**
 1. high avilabiltiy and durability
@@ -360,19 +363,47 @@ In order to replicate your data in different regions.
 5. Configuration options: select/create the role
 Files in an existing bucket and delete markers (or versions) are not replicated automatically (AWS will ask you to create a batch operation job to replicate existing files). It only works for new files.
 
+### S3 Transfer Acceleration
+Amazon S3 Transfer Acceleration enables fast, easy, and secure transfer of files over long distances between your end users and an S3 bucket. It takes advantage of Amazon CloudFront’s globally distributed edge locations: as the data arrives at an edge location, data is routed to Amazon S3 over an optimized network path.
+
+
 ---
 
 ## Elastic Compute Cloud (EC2) 
 
+
+### Chapter Summary
+1. should know how to select best pricing for your EC2, check [ec2-pricing](#pricing-options)
+2. security group? check [here](#security-groups-and-bootstrap-scripts)
+3. user data v.s metadata? 
+   * user data: are simply bootstrap scripts
+   * metadata: is data about your EC2 instances, you can use bootstrap script(user data) to access metadata 
+4. choose the correct networking device, ENI v.s EFA v.s Enhanced Networking? check [here](#networking-with-ec2) 
+5. placement groups? check [here](#optimizing-with-ec2-placement-groups)
+
 ### Pricing options
-1. on demand - pay by the hour or the second
-2. reserved 
+1. on demand 
+   * description: pay by the hour or the second
+   * use case: great for flexibility
+2. reserved
+   * description: reserved capacity for 1 or 3 years, up to 72% discount on the hourly charge  
+   * use case: 
+     * great if you have known, fixed requirements
+     * applications with steady state or predictable usage
+     * applications that requires reserved capacity
+     * users able to male upfront payments to reduce their total computing costs even further
 3. spot 
-  * let you take advantage of unused EC2 capacity in the AWS Cloud. Spot instances are avlb at up to a 90% discount compared to On-demand prices.
-  * when to use? stateless, fault-tolerant or flexible applications, such as, big data, containerized workloads, CI/CD, high-performance computing (HPC), and other test and development workloads.
-4. delicated
+   * description:  enable you to bid whatever price you want for instance capacity. purchase unused capacity at a discount of up to 90%
+   * use case: 
+     * stateless, fault-tolerant or flexible applications, such as, big data, containerized workloads, CI/CD, high-performance computing (HPC), and other test and development workloads.
+     * applications that have felxible start and end times
+     * application that are only feasible at very low compute prices
+     * users with urgent computing need for large amounts of additional capacity
+4. dedicated
   * most expensive one
   * is a `physical server` with EC2  instance capacity fully dedicated to your use. Deicated Hosts allow you to  `use your existing` per-socket, per-core, or per=VM software `licenses`, including windows server, SQL server and SUSE Linux Enterprise Server.
+  * great if you have server-bound licenses to reuse or compliance requirements
+  * any question that talks about special licensing requirements, should use dedicated
 
 ### AWS Commandline
 
@@ -404,6 +435,7 @@ aws s3 cp ${your_file} s3://${bucket_name}
 3. you can have multiple security goups attached to EC2 instances
 4. all inbound traffic is blocked by default
 5. all outbound traffic is allowed
+6. we cannot configure with deny rules, only allows rules (to block IP addresses, we nned to use Network Access Control List (ACL))
 
 
 **Bootstrap Scripts** - A script that runs when the instance first runs. here is an example
@@ -451,6 +483,7 @@ echo "</h1></body></html>"
 	> for when you need speeds between 10 Gbps and 100 Gbps. Anywhere you need reliable, high througput
 3. EFA - Elastic Fabric Adapter
 	> for when you need to accelerate `high performance computing (HFC)` and machine learning applications or if you need to do an OS-bypass. if you see a scenario quetion mentioning HPC or ML and asking what network adapter you want, choose EFA.
+  * keywords: High performance computing (HPC) and Machine learning
 
 
 ### Optimizing with EC2 Placement Groups
@@ -458,7 +491,7 @@ placement groups - a logical grouping of EC2 instances.
 
 1. Cluster Placement Group - `Grouping of instances within a single AZ`, Recommended for applications that need low network latency, high network throughput, or both. Fact, only certain instance types can be lauched into a cluster placement group.
 	> keys: low network latency , high network throughput.
-2. Spread Placement Group - a group of instances that are `each placed  on distinct underlying hardware.`, Spread placement groups are recommended for applications that have a small number of critical instances that should be kept seperate from each other, used for individual instances. 
+2. Spread Placement Group - a group of instances that are `each placed on distinct underlying hardware.`, Spread placement groups are recommended for applications that have a small number of critical instances that should be kept seperate from each other, used for individual instances. 
 	> keys: individual critical EC2 instances
 3. Partition Placement Group - each partition placement group has its own set of racks. Each rack has its own network and power source. No 2 partitions within a placement group share the same racks, allowing you to isolate the impace of hardwre failure within your application. Used for multiple instances.
 	> keys: multiple EC2 instances; HDFS, HBase and Cassandra
@@ -1291,8 +1324,16 @@ for database caching
 ### CloudFront
 A fast content delivery network (CDN) service that securely delivers data, videos, applications, and APIs to customers globally, it helps reduce latency and provide higher transfer speed using WAS edge locations.
 
+* edge location - where content will be cached (using a TTL -time to live). we can clear cached objects, but we will be charged
+* origin - origin of all the files that CDN will distribute. This can be an S3 bucket, and EC2, and elastic load balancer, or Route53
+* distribution - collection of Edge locations
+* types
+  * web distribution, to route whole web
+  * RTMP, use for media streaming.
+
+
 Example:   
-customer -> [CloudFront] -> S3 
+customer -> [CloudFront caches on edge location] -> S3 
 
 1. cloudfront fixes all connection issuess. on the exam every sort of external customer performance issue cane be solved by putting CloudFront in front of your application
    1. slow connectivity from across the globe?
@@ -1551,8 +1592,6 @@ if you see a scenarios ask you to pick a solutiion for data migration, they have
 
 
 ### Storage Gateway
-
-
 1. File Gateway (kinda like a icloud?)
    1. NFS or SMB mount
    2. keep a local copy of recently used files in S3
