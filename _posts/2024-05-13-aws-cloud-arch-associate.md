@@ -11,9 +11,8 @@ tags: aws
   - [S3 lifecycles](#s3-lifecycles)
   - [S3 Lock](#s3-lock)
   - [S3 Encryption](#s3-encryption)
-    - [Types of Encryption](#types-of-encryption)
-    - [Enforcing Server-Side Encryption](#enforcing-server-side-encryption)
   - [Optimizing S3 Performance](#optimizing-s3-performance)
+  - [S3 Cross Region Replication](#s3-cross-region-replication)
 - [Elastic Compute Cloud (EC2)](#elastic-compute-cloud-ec2)
   - [Pricing options](#pricing-options)
   - [AWS Commandline](#aws-commandline)
@@ -286,7 +285,10 @@ Secure, durable, high-scalable object storage.
 | S3 Glacier Deep Archive       | 11 9's Availability and Durability       | >=3 | Rarely accessed data archiving with a default retrieval time of 12 hours (e.g., financial records for regulatory purposes) |
 | S3 Intelligent-Tiering        | 11 9's Availability and Durability       | >=3 | Unknown or unpredictable access pattern                                                                                    |
 
-
+* S3 [Lock](#s3-lock)
+* S3 [Encryption](#s3-encryption)
+* S3 Performance [Optimization](#optimizing-s3-performance)
+* S3 [Replication](#s3-cross-region-replication)
 
 **S3 Standard**
 1. high avilabiltiy and durability
@@ -316,8 +318,8 @@ Secure, durable, high-scalable object storage.
 
 
 ### S3 Lock
-1. use **S3 Object Lock** to store objects using `write once, read many (WORM)` model
-2. object lock can be on individual objects or applied across the bucket as a whole
+1. **WORM** model, use **S3 Object Lock** to store objects using `write once, read many (WORM)` model
+2. Object lock can be on individual objects or applied across the bucket as a whole
 3. Object Lock comes into 2 models: `governace mode` and `compliance mode`.  
    1. `Governace mode` - users can't overwrite or delete an object version or aler its lock settings unless they have special permissions.
    2. `Compliance mode` -  a protected object version can't be overwirtten or deleted by any user under `retention period`.
@@ -327,27 +329,36 @@ Secure, durable, high-scalable object storage.
 
 
 ### S3 Encryption
-#### Types of Encryption
-1. Encryption Transit
-      1. SSL/TLS
-      2. HTTPS
-2. Server-Side Encryption
-   1. SSE-S3: S3-manged keys, using AES 256-bit encryption
-   2. SSE-KMS
-   3. SSE-C: Customer-provided keys
-
-3. client-Side Encyption
-
-#### Enforcing Server-Side Encryption
-1. console - select the encryption setting on S3 Bucket. 
-2. Bucket Policy - A bucket policy can deny all PUT requests that don't include the `x-amz-server-side-encryption` parameter in the request header.
+* Types of Encryption
+  1. Encryption Transit
+        1. SSL/TLS
+        2. HTTPS
+  2. Server-Side Encryption
+    1. SSE-S3: S3-manged keys, using AES 256-bit encryption
+    2. SSE-KMS (keep in mind the KMS limits)
+    3. SSE-C: Customer-provided keys
+  3. client-Side Encyption
+* Enforcing Server-Side Encryption
+  1. console - select the encryption setting on S3 Bucket. 
+  2. Bucket Policy - A bucket policy can deny all PUT requests that don't include the `x-amz-server-side-encryption` parameter in the request header.
 
 
 
 ### Optimizing S3 Performance
 1. by spreading reads across different `prefixes` (folders&subfolders under a bucket), in another word, `to create more folders under a bucket`
-2. using `multipart uploads` to increase performance when uploading files to s3, if the file is `over 100MB` and must be used for any file `over 5GB`
-3. Use `S3 byte-range fechtes` to increase performance when downloading files from S3.
+2. upload - Using `multipart uploads` to increase performance when uploading files to s3, if the file is `over 100MB` and must be used for any file `over 5GB`
+3. download - Use `S3 byte-range fechtes` to increase performance when downloading files from S3.
+
+
+### S3 Cross Region Replication
+In order to replicate your data in different regions.
+
+1. Create bucket
+2. Go to Management and Replication
+3. Enable versioning (it must be enabled in both source and destination)
+4. Set Source and Destination
+5. Configuration options: select/create the role
+Files in an existing bucket and delete markers (or versions) are not replicated automatically (AWS will ask you to create a batch operation job to replicate existing files). It only works for new files.
 
 ---
 
