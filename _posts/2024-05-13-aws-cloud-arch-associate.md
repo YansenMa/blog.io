@@ -743,6 +743,21 @@ how to migrating mongoDB from on-premises to AWS
   * block IP addresses: Block IP using network ACLs, not security groups. (could be a senario question)
   * network ACL can be associated with many subnets, but a subnet can **ONLY** have one NACL
   * NACL are **stateless**, meaning they can have separate inbound and outbound rules, unlike with security group.
+* Direct Connect
+> AWS Direct connect is a cloud service solution that makes it easy to establish a dedicated network connection from your premises to AWS. Therefore, we can establish private connectivity between AWS and your datacenter, office. or colocation environment, which in many cases can reduce your network costs. increase bandwith throughput and provide a more consistent network experience than internet-based connections
+  * Direct connect directly connects your data center to AWS
+  * useful for high-throughput workloads (e.g, lots of network traffic)
+  * help when you need a stable and reliable secure connection
+  * ues case:
+    * you've got a VPN connection, it keeps dropping out, you need a stable and reliable connection that can handle high-throughput, think Direct Connect.
+* VPC Endpoints [here](#private-communication-using-vpc-endpoint)
+  * use case? 
+  * types?
+* VPC Peering [here](#building-solutions-across-vpcs-with-peering)
+  * VPC <-> VPC
+* AWS PrivateLink [here](#network-privacy-with-aws-privatelink)
+* AWS Transit GW - if you see a question about simplifying network topology, or they're talking about IP multicasting, think of Transit GW
+* AWS Wavelength - if you see a scenario question about 5G, increasing application speed at edge using mobile networks, think AWS Wavelength
 
 ### Overview
 ![vpc](https://github.com/YansenMa/image-hosting-repo/raw/main/vpc.png)
@@ -789,8 +804,10 @@ how the instance in the private subnet talk to internet?
 ### Private Communication Using VPC Endpoint
 1. Use Case - when you want to connect AWS service without leaving the Amazon internal network
 2. 2 Types of VPC Endpoints
-   1. Gateway Endpoints: similar to NAT GW, a gateway endpoint is a virtual device your provision. support s3 and DyanmoDB
-   2. Interface Endpoints: an elastic network interface with a private IP address that serves as an entry point for traffic headed to a supported service. They support a large number of AWS services. 
+   1. Gateway Endpoints: 
+      1. similar to NAT GW, a gateway endpoint is a virtual device your provision. `support s3 and DyanmoDB`
+   2. Interface Endpoints: 
+      1. an elastic network interface with a private IP address that serves as an entry point for traffic headed to a supported service. They support a large number of AWS services. 
 
 ### Building Solutions across VPCs with Peering
 1. **Allows you to connect** 1 VPC with another via a direct network route using private IP
