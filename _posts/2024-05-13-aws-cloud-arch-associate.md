@@ -24,6 +24,7 @@ tags: aws
   - [Networking with EC2](#networking-with-ec2)
   - [Optimizing with EC2 Placement Groups](#optimizing-with-ec2-placement-groups)
 - [Elastic Block Storage (EBS) and Elastic File System (EFS)](#elastic-block-storage-ebs-and-elastic-file-system-efs)
+  - [Chatper Summary](#chatper-summary)
   - [EBS](#ebs)
     - [SSD](#ssd)
     - [HDD](#hdd)
@@ -508,20 +509,71 @@ placement groups - a logical grouping of EC2 instances.
 ## Elastic Block Storage (EBS) and Elastic File System (EFS)
 Storage volumes you can attach to your EC2 intances
 
+
+### Chatper Summary
+* Storage Options Use Caseses (important)
+  * S3 - used for serverless object storage
+  * Glacier - everytime your seee `Archiving` object, it would be a glacier question 
+  * EFS - Network File System (NFS) for Linux instance. Centralized storage solution acrosss multiple AZs
+  * FSx for Lustre - File storage for high performance computing Linix file systems
+  * EBS Volumes - Persistent storage for EC2 instance
+  * Instance Store - Ephemeral storage for EC2 instances.
+  * FSx for windows - File storage for Windows instances. Centrialized storage solution across multiple AZs.
+* EBS is persistent storage volumes for EC2
+* You can create an EBS volume as **encrypted** and then also any `snapshot` taken of that volume will therefore be encrypted as well.
+* how to encrypt volumes? (important), [here](#ebs-ecryption)
+* Types of EBS
+  * ssd - [here](#ssd)
+  * hdd - [here](#hdd)
+* EBS Volumne and Snapshots
+  * volumes exist on EBS, whereas snapshot exits on S3
+  * snapshots are point-in-time photographs of volumes and are incremental in nature
+  * the 1st snapshot will take some time to create. For consistent snapshots, stop the instance and detach the volume
+  * you can share snapshots between AWS accounts as well as between regions. but first you nedd to copy that snapshot to the target region
+  * you can resize EBS volumes on the fly as well as changing the volume types.
+* EBS v.s Instance Store
+  1. Intance store volumes are sometimes called `ephemeral storage` (data only persists for the lifetime of the instance it's attached to)
+  2. Instance store volumes `cannot be stopped`, if the underlying host fails, you will lose your data
+  3. EBS-backed instance `can be stopped`, you will not lost the data on this instance if it's stopped
+  4. you can reboot EBS and instance store volumes and you will `not lose your data`
+  5. By default, both root volumes will be **deteted on termination**. However, with EBS volumes, you can tell AWS to keep the root device volume.
+  6. An Amazon Machine Image AMI is just a blueprint for an EC2 instance.
+* EFS [here](#efs)
+  * if you have a scenario-based question around `highly scalable shared storing using NFS`, think EFS
+* In the exam you'll be given different scenarios and asked to choose whether you should use `EFS`, `FSx for windows` or `FSx for lusture`
+  * EFS - when you need distributed, highly resilient storage for Linux intances and Linux-based applications
+  * Amazon FSx for Windows: When you need centralized storage for windows-based applications, such as SharePoint, SQL Server, Workspaces, IIS Web Server or any other native Microsoft application
+  * Amazon FSx for Lustre: when you need high-speed, high-capacity distributed storage. This will be for applications that do high performace computing (HPC), financial modeling, etc. Remember that FSx for Lustre can store data directly on S3
+* AWS Backup
+
 ### EBS
 1. production workloads - designed for mission-critical workloads
 2. high-available - automatically replicated within a single AZ to protect against hardware failures.
 3. scalable - dynamically increase capcacity and change the volumn type with no downtime or performance impact to your live systems.
 
 #### SSD
-* General Purpose SSD (gp2) - a balance of price and performance.
-* General Purpose SSD (gp3) - the top performance of gp3 is 4 times faster than max throughput of gp2 volumns
-* Provisioned IOPS SSD (io1) - high performance option and the most expensive
+* General Purpose SSD (GP2) 
+  * a balance of price and performance, 
+  * suitbale for boot disk, can be used for most workloads
+  * up to 16k IOPS (IOPS. IOPS are a unit of measure representing input/output operations per second.)
+* General Purpose SSD (GP3) 
+  * the top performance of gp3 is 4 times faster than max throughput of gp2 volumns
+  * suitbale for high performance application
+  * 3000 IOPS
+* Provisioned IOPS SSD (IO1) 
+  * high performance option and the **most expensive**
+  * faster than GP3
   * designed for I/O-intensive applications, large database and latency-sensitive workloads.
+  * commonly used for **database**
 
 #### HDD
-* Throughput Optimized HDD (st1) - low-cost hdd volumn, and cannot be a boot volumne
-* Cold HDD (sc1) - lowest-cost hdd volumn, for apps that need the lowest cost and performance is not a factor. and cannot be a voot volume.
+* Throughput Optimized HDD (ST1) 
+  * magnetic storage
+  * low-cost hdd volumn, and **cannot be a boot volumne**
+  * typically used for **big data, data warehoueses and log processing**
+* Cold HDD (sc1) 
+  * **lowest-cost** hdd volumn, for apps that need the lowest cost and performance is not a factor. and **cannot be a boot volume.**
+  * common use could be for **file server**
 
 #### Volumnes and Snapshots
 
@@ -539,10 +591,10 @@ Storage volumes you can attach to your EC2 intances
 
 #### EBS Ecryption
 how to encrypt volumes
-1. create a snapshot of the unencrypted root device volume
-2. create a copy of the snapshot and slect the encypt optin
-3. create an AMI from the encrypted snapshot
-4. use that AMI to launch new encrypted instances
+1. `create a snapshot` of the unencrypted root device volume
+2. create a `copy` of the snapshot and select the `encrypt option`
+3. create an `Amazon Machine Image AMI` from the encrypted snapshot
+4. use that AMI to `launch new` encrypted instances
 
 
 #### EC2 Hibernation
@@ -567,14 +619,6 @@ when you need cnetralized storage for windows-based application, e.g., sharpoint
 
 ### AMI - Amazon Machine Images 
 provides the information required to launch an instance. you must specify an AMI when you launch an instance.
-
-EBS v.s Instance Store
-1. Intance store volumes are sometimes called ephemeral storage
-2. Instance store volumes `cannot be stopped`, if the underlying host fails, you will lose your data
-3. EBS-backed instance `can be stopped`, you will not lost the data on this instance if it's stopped
-4. you can reboot EBS and instance store volumes and you will not lose your data
-5. By default, both root volumes will be deteted on termination. However, with EBS volumes, you can tell AWS to keep the root device volume.
-6. An AMI is just a blueprint for an EC2 instance.
 
 
 ---
@@ -1804,6 +1848,7 @@ in exam
 * real-time = kinesis
 * logging = cloudwatch logs 
 * compute = EC2
+* archive = glacier
 
 ---
 ## Load Balancer
