@@ -36,6 +36,7 @@ tags: aws
   - [FSx](#fsx)
   - [AMI - Amazon Machine Images](#ami---amazon-machine-images)
 - [Databases](#databases)
+  - [Chapter Summary](#chapter-summary-3)
   - [Read Replica](#read-replica)
     - [Keys](#keys-1)
   - [DynamoDB](#dynamodb)
@@ -50,6 +51,7 @@ tags: aws
   - [Lerveragubg Amazon Quantum Ledger Database (QLDB) for ledger Databases](#lerveragubg-amazon-quantum-ledger-database-qldb-for-ledger-databases)
     - [Analyzing Time-series Data with Amazon Timestream](#analyzing-time-series-data-with-amazon-timestream)
 - [Virtual Private Cloud (VPC) Networking](#virtual-private-cloud-vpc-networking)
+  - [Chapter Summary](#chapter-summary-4)
   - [Overview](#overview)
   - [Using NAT GW for Internet Access](#using-nat-gw-for-internet-access)
   - [Protecting your Resources using Security Group](#protecting-your-resources-using-security-group)
@@ -622,8 +624,11 @@ provides the information required to launch an instance. you must specify an AMI
 
 
 ---
-
 ## Databases
+
+### Chapter Summary
+* Read Replica [here](#read-replica)
+
 
 ### Read Replica
 * A `read replica` is a read only copy of the primary rdb, and it great for read heavy workloads and takes the load off your primary rdb.
@@ -631,9 +636,10 @@ provides the information required to launch an instance. you must specify an AMI
 * each read replica has it's own DNS endpoint
 * read replica can be promoted as its own databases, this breaks the replication
 #### Keys 
-1. it scaling read performance, `not` for disaster recovery
-2. requires automatic backup. - automatic back must be enabled in order to deploy a read replica   
-3. multiple read replica are supported.
+1. It scaling read performance, `not` for disaster recovery
+2. Requires automatic backup. - automatic back must be enabled in order to deploy a read replica   
+3. Multiple read replica are supported.
+  * allow you to add up to 5 read replicas to each DB instance
 
 ### DynamoDB
 #### DynamoDB Basis 
@@ -711,6 +717,32 @@ how to migrating mongoDB from on-premises to AWS
 
 ---
 ## Virtual Private Cloud (VPC) Networking
+
+### Chapter Summary
+* Basics
+  * Think of VPC as a logical data center in AWS
+  * Consists of  
+    * `Internet GW` or `virtual private GW`, 
+    * `route tables`, 
+    * `network access control lists`, 
+    * `subnets`
+    * `security group`
+  * 1 subnet is always in 1 AZ
+* Network Address Translation (NAT) Gateway [here](#using-nat-gw-for-internet-access)
+  * how instance in private subnet talk to internet? 
+  * automatically assigned public IP address
+  * [important] high availability with NAT GW, you can create an AZ independent architecture. 
+    * if you have resources in multi-AZs and they share a NAT GW, in the event the NAT GW's AZ is down, resources in the other AZs lose internet access
+    * to resolve the above issue and create an availibility zone-independent arch, This can be done by creating a NAT GW in each AZ and then configuring the routing to ensure resources in the same NAT GW are in the same AZ
+* Security Group
+  *  security goups are stateful = if you send a request from your instance, the response traffic for that request is allowed to flow in regardless of inbound security group rules
+* Network ACL [here](#controlling-subnet-traffic-with-network-acls)
+  * your vpc automatically comes with a default network ACL, and by default it allows all in-out traffic
+  * custom network ACLs, by default, custom ACL denies all in-out traffic until you add rules
+  * each subnet in your VPC must be associated with a network ACL
+  * block IP addresses: Block IP using network ACLs, not security groups. (could be a senario question)
+  * network ACL can be associated with many subnets, but a subnet can **ONLY** have one NACL
+  * NACL are **stateless**, meaning they can have separate inbound and outbound rules, unlike with security group.
 
 ### Overview
 ![vpc](https://github.com/YansenMa/image-hosting-repo/raw/main/vpc.png)
