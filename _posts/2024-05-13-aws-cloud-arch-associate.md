@@ -627,8 +627,31 @@ provides the information required to launch an instance. you must specify an AMI
 ## Databases
 
 ### Chapter Summary
+* RDS is for `OLTP` (online transaction processinng workloads)
+* RDS is not suitable for `OLAP` (online anylytics processing)
 * Read Replica [here](#read-replica)
-
+* Read Replica v.s Multi-AZs ? (senario-question)
+  * Read Replica
+    * a `read-only` copy of your primary database in the same AZ, cross-AZ, or cross-region
+    * used to increas or scale read performance
+    * great for read-heavy workloads and takes the load off your primary database
+  * Multi-AZs 
+    * an exact copy of your production database in another AZ
+    * used for `disaster recovery`
+    * in the event of failure, RDS will automatically failover to the standby instance
+* Aurora Serverless Use case - Aurora Serverless provides a relatively simple, cost-effective, option for infrequent, intermittent, or unpredictable workloads.
+* DynamoDB [here](#dynamodb)
+* DynamoDB Transactions [here](#dynamodb-transactions)
+  * if you see any scenario question that mentions ACID requirements, think `DynamoDB transaction`
+* DynamoDB Stream
+![vpc](https://github.com/YansenMa/image-hosting-repo/raw/main/dynamodb-stream.png)
+* if you want to add redundancy to DynamoDB -> turn on global table (in order to turn on global table, you should turn on DynamoDB stream)
+* MongoDB to AWS? 
+  * MongoDB on-premises -> AWS Database Migration service [here](#aws-database-migration-service-dms) -> Amazon `DocumentDB`
+* if you want to migrating big data Cassandra cluster? think of AWS `keyspaces`
+* `Naptune` is a distractor, if dont talking about `graph dabatase`
+* `QLDB` (Quantum Ledger Database) is a distractor, if don't talk about `immutable database`
+* if you see a senario question about where to store large amount of time-series data for analysis? -> `TimeStream`
 
 ### Read Replica
 * A `read replica` is a read only copy of the primary rdb, and it great for read heavy workloads and takes the load off your primary rdb.
@@ -637,7 +660,7 @@ provides the information required to launch an instance. you must specify an AMI
 * read replica can be promoted as its own databases, this breaks the replication
 #### Keys 
 1. It scaling read performance, `not` for disaster recovery
-2. Requires automatic backup. - automatic back must be enabled in order to deploy a read replica   
+2. Requires `automatic backup`. - automatic back must be enabled in order to deploy a read replica   
 3. Multiple read replica are supported.
   * allow you to add up to 5 read replicas to each DB instance
 
