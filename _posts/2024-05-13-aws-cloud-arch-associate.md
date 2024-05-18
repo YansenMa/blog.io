@@ -781,6 +781,43 @@ how to migrating mongoDB from on-premises to AWS
 * AWS PrivateLink [here](#network-privacy-with-aws-privatelink)
 * AWS Transit GW - if you see a question about simplifying network topology, or they're talking about IP multicasting, think of Transit GW
 * AWS Wavelength - if you see a scenario question about 5G, increasing application speed at edge using mobile networks, think AWS Wavelength
+* How to setup your VPC?
+  1 create VPC
+    1.1. Go to VPC service in the AWS console, your VPC, create VPC
+    2.2. File IPv4 CIDR block and tanacy and click on create
+  > no subnets and internet gateways have been created.
+
+  > route table, network ACLs and security group have been created
+
+  > security group can't span VPCs.
+  2. create subnet
+    2.1. go to subnets -> create subnets
+    2.2. name it, select the VPC creted in step 1, select availability zone and IPv4 CIDR block
+    2.3. click on Create
+  > By default, no subnet has public IP. in order to do this, select the subnet and click on actions and make it auto apply public IP
+
+  > Amazon always reserve 5 IP addresses with your subnets.
+
+  3. Create Internet GW
+     3.1. Go to internet GW, create internet GW.
+     3.2. Name it and click on create
+     3.3. Select it and with actions, attach the internet GW to the VPC (only VPC can be attached to ONE internet GW)
+  > At the moment, all our VPC are public because our routes allow it,  let's fix it.
+
+  4. Create a public subnet
+    4.1 Go to Route tables, select our route table and select `routes`
+    4.2 Edit Routes
+    4.3 Fill destination (any IP) with target internet GW
+    4.4 Go to subnet Association
+    4.5 Edit subnet associations in order to select the subnet that need to be public  
+
+  > now, we can't ssh-access to our private EC2 intance from our public subnet
+
+  5. create ssh-access to private EC2
+     5.1. Go to EC2 -> Security Groups -> Great Security Group
+     5.2. Select the VPC, type `All ICMP` (protocol ICMP) and the source the public subnet
+     5.3. Select the VPC, type `SSH` and the source the private subnet
+     5.4. Change the security group of our EC2 instance
 
 ### Overview
 ![vpc](https://github.com/YansenMa/image-hosting-repo/raw/main/vpc.png)
