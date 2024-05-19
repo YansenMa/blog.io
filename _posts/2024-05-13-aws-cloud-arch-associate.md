@@ -69,6 +69,7 @@ tags: aws
   - [Clasic LB](#clasic-lb)
   - [Deregistration Delay](#deregistration-delay)
 - [CloudWatch-·Monitoring](#cloudwatch-monitoring)
+  - [Chapter Summary](#chapter-summary-6)
 - [High Availability and Scaling](#high-availability-and-scaling)
   - [Scaling EC2](#scaling-ec2)
   - [Scaling RDB](#scaling-rdb)
@@ -966,6 +967,19 @@ Need the `IPv4 address` of your end user? - Look for the `X-Forwarded-For` heade
 
 ---
 ## CloudWatch-·Monitoring 
+
+### Chapter Summary
+1. 'Cloudwatch is the main tool' for anything alarm related
+2. not everything should go through cloudwatch. for example, you may get a senario-based questiont talking about watching for resource changes,use AWS Config
+3. 'Know your intervals' the standard metric is delivered every 5 mins, while detailed monitoring delivers data every 1 min
+4. cloudwatch logs is the place for logs, EC2, on-premises RDS, Lambda and CloudTrail can all integrate of this service
+5. SQL? think about Cloudwatch logs insight. (high-level)
+6. Real-time = Kinesis
+7. Monitoring Container?
+   1. `Grafana` might be best for visulization of container metrics. if you need an AWS-managed service for correlation and visualization of container or loT metrics, this is the best option
+   2. `Monitoring container metrics at scala?` Think Amazon Managed Service for `Prometheus`. Leverage this service for any `Kubernetes-based metrics` monitoring at scale. It can be an Amazon EKS cluster or your own self-managed cluster.
+
+
 there are no default alarms, anything you want to hear about must be created.
 standard is 5 mins intervals whereas detailed is 1 min.
 
