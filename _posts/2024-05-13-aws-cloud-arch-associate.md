@@ -1112,6 +1112,31 @@ Amazon Athena - data analyzation
 Amazon Redshit - data transformation   
 Amazon QuickSight - data visualization 
 
+
+1. Redshift and EMR
+   1. while Redshift is a relational DB, it's not replacement of a traditional RDS
+   2. Redshift supports single-AZ and mult-AZs deployment
+   3. EMR make up of EC2, so you can employ your Ec2 instance cost-saving measures, like saving plans or reserved instances
+2. kinesis is the only service with a !!REAL-time!! Response
+3. SQS and kinesis can both be queues, SQS is easier and simpler, and Kinesis is faster and can store data for up to a year
+4. `Serverless SQL = Athena`, query data in S3
+5. `Glue is serverless ETL service`, it can help to create that schema for your data when paired with Athena
+6. kinesis data stream v.s data firehose - key is one is real-time, one is near real time
+7. need a dashboard or visualization of your data, go to Quicksight
+8. opensearch is primarily used for analyzing log files and various documents or real-timme data like click stream, especially within an ETL process
+9. Amazon OpenSearch service extreamly similar with Amazon Elasticsearch service (predecessor), think they are damn same shit
+10. Data pipline
+    1.  it's a managed ETL service in AWS
+    2.  implement automated workflows for movement and transformation of your data
+    3.  it itegrates with storages services (RDS, S3) and compute service (EC2, EMR)
+    4. perfect for Data-driven and task-dependent ETL workloads 
+11. Amazon Managed streaming for Apache Kafka (MSK)
+    1.  aws managed apache kafka
+    2.  it handles control plane operations (creation, updating and deletion)
+    3.  your manage data plane operations
+    4. push broker logs to Cloudwatch, S3 or kinese Data Firehose
+    5. API calls are all logged to CloudTrail
+
 ### Redshift
 Redshift - is a fully managed bigdata warehouse service in AWS, it's a very large relational DB traditionally used in big data app.
 
