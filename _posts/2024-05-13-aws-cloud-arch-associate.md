@@ -62,8 +62,10 @@ tags: aws
   - [Securing your Network with VPN Cloudhub](#securing-your-network-with-vpn-cloudhub)
 - [Route 53](#route-53)
 - [Elastic Load Balancing](#elastic-load-balancing)
+  - [Chapter summary](#chapter-summary-5)
   - [Application LB](#application-lb)
   - [Network LB](#network-lb)
+  - [Gateway LB](#gateway-lb)
   - [Clasic LB](#clasic-lb)
   - [Deregistration Delay](#deregistration-delay)
 - [CloudWatch-·Monitoring](#cloudwatch-monitoring)
@@ -783,8 +785,8 @@ how to migrating mongoDB from on-premises to AWS
 * AWS Wavelength - if you see a scenario question about 5G, increasing application speed at edge using mobile networks, think AWS Wavelength
 * How to setup your VPC?
   1. create VPC
-    1. Go to VPC service in the AWS console, your VPC, create VPC
-    2. File IPv4 CIDR block and tanacy and click on create
+      1. Go to VPC service in the AWS console, your VPC, create VPC
+      2. File IPv4 CIDR block and tanacy and click on create
   > no subnets and internet gateways have been created.
 
   > route table, network ACLs and security group have been created
@@ -887,17 +889,18 @@ if you have multiple sites, and each with its own VPN connection, you can use AW
 
 ---
 ## Route 53
-Route 53 is Amaon's DNS Service.
+Route 53 is Amazon's DNS Service.
 
 DNS record types:
-1. SOA
-2. NS record (Name server records)
-3. A record - fundamental type of DNS record, to translate the name of the domain to an IP address.
+1. SOA Records
+2. CNAME records
+3. NS Records (Name server records)
+4. A records - fundamental type of DNS record, to translate the name of the domain to an IP address.
 
 
 CNAME v.s Alias record 
 * CCNAME - can be used to resolve one domain name to another. cannot be used for naked domain names.
-* Alias Records - work like CNAME, but alias records are used to map resource record in your hosted zone to AWS resources aleays choose an alias record over a cname.
+* Alias Records - work like CNAME, but alias records are used to map resource record in your hosted zone to AWS resources always choose an alias record over a cname.
 
 > ![vpc_link](https://github.com/YansenMa/image-hosting-repo/raw/main/Rout53-simple-routing-policy.png)
 
@@ -922,6 +925,13 @@ CNAME v.s Alias record
 ---
 ## Elastic Load Balancing 
 
+### Chapter summary
+1. know the 4 type LB and use case
+2. know what is Sticky Sessions, and use case
+   1. Sticker sessions enable your users to stick to the same EC2 instance, can be useful if you are storing information locally to that instance
+   2. you may see a scenario-based question where you remove an EC2 instance from a pool, but the load balancer continues to direct traffic to that EC2 instance, solution is to disable the sticky sessions
+   3. you can enable sticky sessions for ALB as wll, but the traffic will be sent at the target group level.
+
 ### Application LB
 Best suited for load balancing of HTTP and HTTPS traffic. They operate at layer 7 and are application-aware, and intelligent LB.
 * **Listener** - checks for connection request from clients, using the protocol and port you configure.
@@ -937,11 +947,16 @@ Operating at the connection level (Layer 4) NLBs are capable of handling million
 * **Use case** - are best suited for load balancing of TCP traffic where extreme performance is required. 
 * NLB can decrypt traffic, but you will need to install the certificate on the load balancer.
 
+### Gateway LB
+watch for any questions about load balancers operating at layer 3 for inline virtual appliances, (don't come to exam much)
+
 ### Clasic LB
 are the legacy load balancers, you can load balance HTTP/HTTPS applications and use Layer 7 specific featuers, such as X-Forwarded and sticky sessions. You can also use strict Layer 4 load balancing for applications that rely purely on the TCP protocol.
 Can be used in test/dev lb
 
-Need the IPv4 address of your end user? - Look for the `X-Forwarded-For` header
+504 error means the gateway has timed out, application is not responding within the idle timeout period
+
+Need the `IPv4 address` of your end user? - Look for the `X-Forwarded-For` header
 
 **Sticky Sessions** - CLB route each request independently to the registered EC2 instance with the smallest load. Sticky sessions allows you to bind a user's session to a specific EC2 instance. This ensures all requests from the user during the session are sent to the same instance.
 
