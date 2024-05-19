@@ -71,6 +71,7 @@ tags: aws
 - [CloudWatch-·Monitoring](#cloudwatch-monitoring)
   - [Chapter Summary](#chapter-summary-6)
 - [High Availability and Scaling](#high-availability-and-scaling)
+  - [Chapter Summary](#chapter-summary-7)
   - [Scaling EC2](#scaling-ec2)
   - [Scaling RDB](#scaling-rdb)
   - [Scaling Non-Relational DB](#scaling-non-relational-db)
@@ -998,6 +999,21 @@ standard is 5 mins intervals whereas detailed is 1 min.
 
 ---
 ## High Availability and Scaling
+
+### Chapter Summary
+1. `Auto Scaling is ONLY for EC2`. No other service can be scaled using Auto Scaling. Other service might have a built-in option, but they aren't included in Auto Scaling groups.
+2. `Get ahead of the workload`, Whenever possible, favor solutions that are predictive rather than reactive.
+3. `Bake AMI (Amazon Machine Image) to reduce build time` You can avoid long provisioning times by putting everything in an AMI, This is better than using user data whenever possible
+4. `Spread out`, make sure you're spreading your auto scaling over multi-AZs
+5. `Steady state groups` allows us to create a situation where the failure of a legacy codebase or resource that can't be scaled can automatically recover from failure.
+if you are asked to create a highly avlb solution for that legacy resource where you can't have more than one online at once
+6. `ELBs are essentail`. Make sure you enable health checks from load balancers - otherwise, instances won't be terminated and replaced when they fail health check
+7. Scaling Database?
+   1. RDS has the most database scaling options
+   2. horizontal scaling is usally preferred over vertical
+   3. [Read replicas](#read-replica) are your frinds
+   4. DynamoDB scaling comes down to access patterns.
+      1. if you see a scenario-based question where the data is unpredicatable, access pattern spikes up and down, we cannot predict what we need, then we want to pick that on-demand option.
 
 ### Scaling EC2 
 **What are we going to scaling with?** - A Launch Template, specifies all of the needed settings that go into building out an Ec2 instance. It's a collection of settings that you can configure so you don't have to walk through the EC2 wizard over and over.
