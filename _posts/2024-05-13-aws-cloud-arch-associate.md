@@ -76,6 +76,7 @@ tags: aws
   - [Scaling RDB](#scaling-rdb)
   - [Scaling Non-Relational DB](#scaling-non-relational-db)
 - [Decoupling Workflows](#decoupling-workflows)
+  - [Chapter Summary](#chapter-summary-8)
   - [Simple Queue Service (SQS)](#simple-queue-service-sqs)
   - [Simple Notification Service (SNS)](#simple-notification-service-sns)
   - [API GW](#api-gw)
@@ -1043,6 +1044,39 @@ if you are asked to create a highly avlb solution for that legacy resource where
 ---
 ## Decoupling Workflows 
 
+### Chapter Summary
+1. SQS
+  1. `SQS can duplicate messages`, this is only once in a while, so if it's happening consistently, check for a misconfigured visibility timout or if the developer is failing to make the delete API call.
+  2.  `Queues aren't bi-directional`, if you need communication to return to the instance that sent the msg, you'll need a second queue.
+  3. `know the defaults`, it's important to understand the standard values for all SQS settings.
+  4. `Nothing lasts forever`, messages stored in SQS can only persist up to 14 days.
+  5. if the msg ordering important, make sure to select SQS FIFO
+2. SNS
+   1. proactive notification -> SNS
+   2. cloudwatch loves SNS
+3. API GW
+   1. don't need to have in-depth understanding
+   2. only need to know it acts as a secure front door to external communication coming into your env
+4. AWS Batch
+   1. long-running bacted workloads, anything related to batch workloads that long running (> 15mins, which is lambda limitation), then involve AWS Batch
+   2. Queued worklods, if you see a question about batch workloads requiring queues, then think of AWS Batch
+   3. On-demand alternative to AWS lambda: Questions regarding an alternative solution to AWS lambda due to runtime requirements could likely to involve the AWS Batch
+5. AWS MQ
+   1. managed messaging broker, if there is any mention of manged broker service, think of AWS MQ.
+   2. RabbitMQ or ActiveMQ, any mention of these 2 tech means you should look for Amazon MQ within the answer
+   3. Specific messsaging protocals: if you see messaging protocals like below, select Amazon MQ
+      1. JMS
+      2. AMQP 0-9-1
+      3. AMQP 1.0
+      4. MQTT
+      5. OpenWire
+      6. STOMP
+6. Step Functions
+   1. Serverless orchestration service: Any questions with this saying will likely involve Step Functions as the answer
+   2. Different workflow decision requirements: whenever the solution requires different states or logic during workflows (like, condition checks, failure checks, or wait periods), think of Step Functions
+7. AWS AppFlow
+   1. for 3rd party SaaS data ingestion with AWS services.
+   2. bi-directional
 
 ### Simple Queue Service (SQS)
 A simple queue service which allows async processing of work
