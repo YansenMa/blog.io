@@ -93,6 +93,7 @@ tags: aws
   - [Analyzing Data with Amazon OpenSearch Service](#analyzing-data-with-amazon-opensearch-service)
   - [BigData Exam Tips](#bigdata-exam-tips)
 - [Serverless Architecture](#serverless-architecture)
+  - [Chapter Summary](#chapter-summary-9)
   - [Lambda](#lambda)
   - [Leveraging the AWS Serverless Application Repo](#leveraging-the-aws-serverless-application-repo)
   - [Container](#container)
@@ -1254,6 +1255,29 @@ Amazon OpenSearch Service loves logs
 ---
 ## Serverless Architecture
 
+
+### Chapter Summary
+* Lambda 
+  * lambda loves roles, whenever you're taling about credentials and lambda, ensure your're attaching a role to the function
+  * lambda riggers: you'll commonly see questions asking what can kick off a lambda function. S3, kinesis, and EventBridge, etc.
+  * lambda limitations: you can allocate up to 10GB of RAM and 15 mins of runtime.
+  * Any AWS API call: can be a trigger to kick off an EventBridge rule. 
+* Containers and Image
+  * Open source = Kubernetes, if the question asks for a container management solution that can run in AWS and on-premises, you'll want to consider Amazon `EKS` or `EKS Anywhere`.
+  * Fargate can't work alone: In order to use Fargate, you MUST be using Amazon ECS or EKS.
+  * Containers are flexiable: Containers can encompass just about any workloads. Generally, it's preferred to use containers rather than EC2 on the exam
+  * Better to know Docker basics
+  * AWS-managed Image Registry (ECR): if there is mention of an AWS service needed for image storage or image vulnerability scanning, think of Amazon ECR.
+* Amazon Aurora Serverless
+  * Questions regarding auto scaling databases should likely involve Amazon Aurora Serverless databases
+  * if designing a new application with unknown workloads or traffic spikes to the database, look for the answers including this service
+  * when questions mention capacity planning for a new application with a database or development environment, then they likely are going to be using Amazon Aurora Serverless
+* Amazon X-Ray
+  * used to gain application insights using requests and responses of services and functions at different points in an application flow
+  * Traces and downstream response times, if these terms are brought up in the question, then look for AWS X-Ray
+  * AWS Lmabda or API GW insights: AWS X-Ray integrates natively with these services and can easily help you gain deeper insights and understanding of your workloads requests and responses
+* AppSync
+  * Managed GraphQL, question about this managed GraphQL, then AppSync
 ### Lambda
 limitations:
 1. 1000 concurrent executions
