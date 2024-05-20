@@ -128,21 +128,21 @@ tags: aws
   - [Network firewall](#network-firewall)
   - [Secuirty Hub](#secuirty-hub)
 - [Automation](#automation)
-  - [Summary](#summary-1)
+  - [Chapter Summary](#chapter-summary-11)
   - [CloudFormation](#cloudformation)
   - [Elasticbeanstalk (high level knowledge)](#elasticbeanstalk-high-level-knowledge)
   - [Systems Manager (Important)](#systems-manager-important)
 - [Caching](#caching)
-  - [Summary](#summary-2)
+  - [Chapter Summary](#chapter-summary-12)
   - [CloudFront](#cloudfront)
   - [ElasticCache \& DAX](#elasticcache--dax)
-    - [Summary](#summary-3)
+    - [Summary](#summary-1)
   - [Global Accelerator](#global-accelerator)
-    - [Summary](#summary-4)
+    - [Summary](#summary-2)
 - [Governance](#governance)
-  - [Summary](#summary-5)
+  - [Chapter Summary](#chapter-summary-13)
   - [AWS Organization](#aws-organization)
-    - [Summary](#summary-6)
+    - [Summary](#summary-3)
   - [AWS Resource Access Manager (RAM)](#aws-resource-access-manager-ram)
   - [AWS Cross-account role Access](#aws-cross-account-role-access)
   - [AWS Config](#aws-config)
@@ -153,42 +153,42 @@ tags: aws
   - [AWS Compute Optimizer](#aws-compute-optimizer)
   - [AWS Trusted Advisor](#aws-trusted-advisor)
   - [AWS Control Tower](#aws-control-tower)
-    - [Summary](#summary-7)
+    - [Summary](#summary-4)
   - [AWS License manager](#aws-license-manager)
   - [AWS Health dashboard](#aws-health-dashboard)
   - [AWS Service Catalog \& AWS Proton](#aws-service-catalog--aws-proton)
   - [AWS Well-Architected Framewaork (important)](#aws-well-architected-framewaork-important)
-    - [Summary](#summary-8)
+    - [Summary](#summary-5)
 - [Migration](#migration)
-  - [Summary](#summary-9)
+  - [Summary](#summary-6)
   - [Snow family](#snow-family)
-    - [Summary](#summary-10)
+    - [Summary](#summary-7)
   - [Storage Gateway](#storage-gateway)
-    - [Summary](#summary-11)
+    - [Summary](#summary-8)
   - [Data Sync](#data-sync)
-    - [Summary](#summary-12)
+    - [Summary](#summary-9)
   - [AWS Transfer Family](#aws-transfer-family)
-    - [Summary](#summary-13)
+    - [Summary](#summary-10)
   - [AWS Migration Hub](#aws-migration-hub)
-    - [Summary](#summary-14)
+    - [Summary](#summary-11)
   - [AWS Application Discovery Service \& AWS Application migration Service (MGN)](#aws-application-discovery-service--aws-application-migration-service-mgn)
   - [AWS Database Migration Service (DMS)](#aws-database-migration-service-dms)
-    - [Summary](#summary-15)
+    - [Summary](#summary-12)
   - [Migration hub + server migration service (SMS)](#migration-hub--server-migration-service-sms)
 - [Front-End Web and Mobile](#front-end-web-and-mobile)
-  - [Summary](#summary-16)
+  - [Summary](#summary-13)
   - [AWS Amplify](#aws-amplify)
   - [AWS Device Farm](#aws-device-farm)
   - [Amaaon Pinpoint](#amaaon-pinpoint)
 - [Machine Learning](#machine-learning)
-  - [Summary](#summary-17)
+  - [Summary](#summary-14)
   - [Analyzing Text using Amazon Comprehend, amazon Kendra, and Amazon Textract](#analyzing-text-using-amazon-comprehend-amazon-kendra-and-amazon-textract)
   - [Predicting Time-series Data using Amazon Forecast](#predicting-time-series-data-using-amazon-forecast)
   - [Protecting Accounts with Amazon Fraud Detector](#protecting-accounts-with-amazon-fraud-detector)
   - [Working with Text and Speed Using Amazon Polly, Amazon Transcribe and Amazon Lex](#working-with-text-and-speed-using-amazon-polly-amazon-transcribe-and-amazon-lex)
   - [Analyzing Images via Amazon Rekognition (important)](#analyzing-images-via-amazon-rekognition-important)
   - [Amazon SageMaker to Train Learning Models](#amazon-sagemaker-to-train-learning-models)
-    - [Summary](#summary-18)
+    - [Summary](#summary-15)
   - [Amazon Translate](#amazon-translate)
 - [Media (not in the exam yet)](#media-not-in-the-exam-yet)
 - [Summary overall](#summary-overall)
@@ -1646,14 +1646,18 @@ if you have a scenario question about a single place to view all your security a
 
 ---
 ## Automation
-### Summary
+### Chapter Summary
 1. **Understand Cloudformation sections**: While you don't have to be coding expert, you need to generally know what the parameters, mappings and resource sections of tyhe CloudFormation templates do.
 2. **Immutable architecture is preferable**: Gnerally sparking, you'll want to select answers that favor having resources that can be replaced at any time. Stateless is better than stateful on the exam. 
 3. **Mappings and Parameter Store**: can be useful to help makke your templates more flexible. Hardcoded IDs (AMI or snapshot ID) are a source of breakage.
 4. **Elastic Beanstalk** is a one-stop shot for all things AWS. Questions looking for a simple soluiton to bundle and deploy applications should favor this over CloudFormation. 
 5. **Automation Documents** are the primary method used in scenarios asking you to configure the inside of an EC2 instance.
 6. **Don't go too Deep** on Systems Manager, While it has a lot of options, this text will focous on Automation document, Parameter Store, and possibley Session Manager.
+
 ### CloudFormation
+allows you to declare your AWS `infrastructure as code`. Everything is defined via JSON or YAML template file. 
+Not all AWS resources are supported, but most are!
+
 1. cloudformation is perfect for creating immutable architecture
 2. know the layout of a cloudformation template and what sections do
 3. if it finds an error, cloudformation rolls back based on your configurations
@@ -1673,17 +1677,21 @@ List of important Capabilities
 1. Automation: Use predefined or custom playbooks (documents) to enable resource management.
 2. Run Command: Remotely execute commands on managed compute without SSH or RDP
 3. Patch Manager: Automates patching managed instances (OS patches and applications)
-4. Parameter Store: Securely stroe your secrets and[<64;60;21M application configuration information
+4. Parameter Store: Securely stroe your secrets and application configuration information
 5. Maintenance Windows 
 6. **Session Manager** - Securely connect to your manged compute without needing SSH access.
 
 ---
 ## Caching 
 
-### Summary
+### Chapter Summary
 1. **CloudFront is the only option** to add HTTPS to a static website being hosted in an S3 bucket.
+
+> user -> cloudfront -> https -> s3 bucket
+
 2. **AWLAYS** favor answers that include caching.
 3. **GA (Global Accelerator) is your friend** whenever the scenario talks about IP caching.
+its primary use on the test will be to reduce issues with customers caching old IP address.
 
 for database caching
 1. if you see 'in-memory database', 2 solutions, redis and dynamo, if it has dynamo, pick that
@@ -1728,7 +1736,6 @@ customer -> [CloudFront caches on edge location] -> S3
 
 ### Global Accelerator
 
-
 short for (GA) is a networking service that sends your users' traffic through AWS's global network infrastructure via accelerators
 it can increase performance and help deal with IP caching by leveraging Anycast IP addresses.
 
@@ -1744,7 +1751,7 @@ Meant for TCP or UDP traffic! major difference from CloudFront
 ---
 ## Governance
 
-### Summary
+### Chapter Summary
 1. AWS Organization
    1. service control policies (SCPs) have the ultimate say as whether an API call goes through, The are the **only** way to restrict what the root account can do.
    2. Centralized logs are always the right answer. cloudtrail offers support to log everything into a single AWS account.
@@ -1754,26 +1761,26 @@ Meant for TCP or UDP traffic! major difference from CloudFront
    2. Automate the response - config offers the ability to automatically remediate problems using automation dcouments.
    3. know what changed - config is the one-stop shop to see what changed. It will provide you with a history of all your arch
 3. Authenticaation
-   1. user management requires the right tool. Make sure you're using AWS SSO for internal user management and Congito for external.
+   1. user management requires the right tool. Make sure you're using `AWS SSO for internal user management` and `Congito for external`.
    2. Active Directory - is a common topic that should immediantely make you think Directory service. if it's a lift and shift, pick the managed Microsoft AD. If AD is staying on-premises, select AD Connector.
-   3. Cross-account role access is always a better solution than creating unnecessary IAM credentials.
+   3. `Cross-account role access` is always a better solution than creating unnecessary IAM credentials.
 4. Cost Management
-   1. Tracking costs, is a common exam topic. You'll want to use a combination of tags, cost-explorer and AWS budget
-   2. Get ahead of problems by creating proactive alerts. When users get too the 80% threshold, tell someone via SNS/
-   3. Automate the response. Spending too much money? shut something down. Always think about how you can remove the human interaction
-   4. Detailed reports and exploring costs. These questions will usually involve AWS Cost and Usage Reports or Cost Explorer for in-depth reporting purposees.
-   5. Use AWS Compute Optimizer to generate recommendations on implementing more accurate compute sizes based on your actual needs. 
+   1. `Tracking costs`, is a common exam topic. You'll want to use a combination of tags, cost-explorer and AWS budget
+   2. Get ahead of problems by `creating proactive alerts.` When users get too the 80% threshold, tell someone via SNS/
+   3. `Automate the response`. Spending too much money? shut something down. Always think about how you can remove the human interaction
+   4. `Detailed reports and exploring costs`. These questions will usually involve AWS Cost and Usage Reports or Cost Explorer for in-depth reporting purposees.
+   5. `Use AWS Compute Optimizer` to generate recommendations on implementing more accurate compute sizes based on your actual needs. 
 5. Trusted Advisor
    1. it's free to use, but you'll need a business or enterprise support plan to get the most useful checks
-   2. there are limits to Trusted Advisor. It's **Strictly** an auditing tool, and it **won't** solve the problem for you, This is a common trap the exam will set for you.
+   2. there are `limitation` to Trusted Advisor. It's **Strictly** an auditing tool, and it **won't** solve the problem for you, This is a common trap the exam will set for you.
    3. Automate the response. Use EventBridge to kick off a lambda function to solve problem for you.
 6. Accounts and Licenses
-   1. AWS Control Tower can be used to implement compliance and account governance within multi-account environment using automated account setups
+   1. `AWS Control Tower` can be used to implement compliance and account governance within multi-account environment using automated account setups
    2. Leverage preventive or detective guardrails with AWS Control Tower. They are implemented via SCPs and AWS config (respectively)
-   3. AWS License Manager provides a simplified way to manage licenses from supported vendors to prevent license abuse and overcharges. It works in AWS and on-premises (not cloud specific).
+   3. `AWS License Manager` provides a simplified way to manage licenses from supported vendors to prevent license abuse and overcharges. It works in AWS and on-premises (not cloud specific).
 7. Infrastructure and Deployments
-   1. AWS Service Catalog allows end users to provision pre-apporved products and service vias shared catalog portfolios. These are written in CloudFormation
-   2. AWS Proton can empower developers to automate the provisioning of their entire application stack for container-based or serverless architectures.
+   1. `AWS Service Catalog` allows end users to provision pre-apporved products and service vias shared catalog portfolios. These are written in CloudFormation
+   2. `AWS Proton` can empower developers to automate the provisioning of their entire application stack for container-based or serverless architectures.
 8. Well-Architected Tool - to document architectural decisions and their measurements against well-established industry best practices
 9. AWS Health 
    1.  is a dashbaord and service meant to provide notifications of both public and account -specific within AWS
