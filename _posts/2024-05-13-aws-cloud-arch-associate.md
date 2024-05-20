@@ -1447,8 +1447,66 @@ AppSync - Real-Time Data Sync Using GraphQL for Mobile & Web Apps, Online or Off
   * use AI to analyze data in S3
   * preventing identity theft
   * if you see any scenario-based question where it's talking about anylyzing S3 using AI and preventing the leak of personally identifiable information
-* Inspector - it's used to perform vulnerability scan on both Ec2 instance (host assessments) and VPCs (network assessments)
+* Inspector - it's used to perform vulnerability scan on both `Ec2 instance (host assessments)` and `VPCs (network assessments)`
+* Amazon Key MManagement Service (KMS) 
+  * managed service that makes it easy for you to create and control the encryption keys used to encrypt your data
+  * you start using this service by requestin the creation of a Customer Master Key (CMK), 3 ways to generate CMK
+    * AWS creates the CMK for you using `hardware security modules (HSMs)`, and managed by AWS KMS
+    * Import key your self and associate it with a CMK
+    * have the key generated and used in an `AWS Cloud cluster`
+  * Control permissions
+    * key policy
+    * use IAM policy in combination with key policy
+    * use grants in combination with key policy
+* KMS v.s CloudHSM
+  * KMS
+    * shared tenacy of underlying hardware
+    * automatic key rotation
+    * Automatic key generation
+  * CloudHSM
+    * Dedicated HSM to you
+    * full control of underlying hardware
+    * full control of users, groups, keys, etc
+    * no automatic key rotation
+* Secrets Manager
+  * securely streo your application secrets
+  * application use Secrets manager API
+  * rotating credentials is super easy but be careful
+  * When enabled, screts manager will rotate credentials immediately
+  * make sure all your application instances are configured to use Screts manager before enable credential rotation
+* Parameter Strore v.s Secrets Maanger
+  * in the exam, you will get senario-based questions asking if you should use Parameter Store or Secrets Manager. if you want to min cost, then parameter store
+  * if you need more than 10k parameters + key rotation + generate pass using CloudFormation -> Secrets manager
+* Presigned URLs - if you see a senario question where you need to share private files in your S3 buckets, think presigned URLs
+* Adanced IAM Policies
+  * not explicitly allowed == implicitly denied
+  * explicit deny > everthing else
+  * only attached policies have effect
+  * AWS join all applicable policies
+  * AWS managed v.s customer managed 
+* AWS Certificate Manager 
+  * in the exam you will get senario-based question around SSL certificates and what service you should use to integrate SSL certificates
+  * integrates ELB, CloudFront and API GW
+  * free service, automatically renvew your ssl certificates and rotate the old certificates
+* Audits Maanger
+  * if you see a scenario-based question about HIPAA or GDPR compliance that asks about `continuous` auditing or auomating auditing reports -> audit manager. 
+* AWS Artifact (used as a distractor)
+  * if you see a scenario question asking about audits and need for compliance report? -> aws artifact!
+* Cognito
+  * user pool: user directories that provide sign-up and sign-in options for users of your application
+  * identity pool: allow your users access to other AWS service
+  * you can use user pool and identity pool seperately or together.
+ * Important how cognito workflow?
 
+![vpc](https://github.com/YansenMa/image-hosting-repo/raw/main/congito-workflow.png)
+
+* AWS Detective (distractor)
+  * what is detective? 
+  * don't confuse with inspector
+* Network firewall 
+  * if you see a senario question requires hardware firewall -> aws network firewall
+* AWS Security Hub 
+  * scenario question about single place to view all your security alerts -> security hub
 
 ### DDos
 
