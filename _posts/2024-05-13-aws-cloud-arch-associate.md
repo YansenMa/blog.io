@@ -176,19 +176,19 @@ tags: aws
     - [Summary](#summary-12)
   - [Migration hub + server migration service (SMS)](#migration-hub--server-migration-service-sms)
 - [Front-End Web and Mobile](#front-end-web-and-mobile)
-  - [Summary](#summary-13)
+  - [Chatper Summary](#chatper-summary-1)
   - [AWS Amplify](#aws-amplify)
   - [AWS Device Farm](#aws-device-farm)
   - [Amaaon Pinpoint](#amaaon-pinpoint)
 - [Machine Learning](#machine-learning)
-  - [Summary](#summary-14)
+  - [Summary](#summary-13)
   - [Analyzing Text using Amazon Comprehend, amazon Kendra, and Amazon Textract](#analyzing-text-using-amazon-comprehend-amazon-kendra-and-amazon-textract)
   - [Predicting Time-series Data using Amazon Forecast](#predicting-time-series-data-using-amazon-forecast)
   - [Protecting Accounts with Amazon Fraud Detector](#protecting-accounts-with-amazon-fraud-detector)
   - [Working with Text and Speed Using Amazon Polly, Amazon Transcribe and Amazon Lex](#working-with-text-and-speed-using-amazon-polly-amazon-transcribe-and-amazon-lex)
   - [Analyzing Images via Amazon Rekognition (important)](#analyzing-images-via-amazon-rekognition-important)
   - [Amazon SageMaker to Train Learning Models](#amazon-sagemaker-to-train-learning-models)
-    - [Summary](#summary-15)
+    - [Summary](#summary-14)
   - [Amazon Translate](#amazon-translate)
 - [Media (not in the exam yet)](#media-not-in-the-exam-yet)
 - [Summary overall](#summary-overall)
@@ -1956,7 +1956,7 @@ try to answer those 4 question
    3. do you have VMs? server migration service is the tool you will want to use to migrate out of data center and into AWS.
 
 **Application Deiscovery Service**
-   1. Quickly migrate entire applications to AWS Cloud
+   1. Quickly migrate **entire applications** to AWS Cloud
    2. Agentless discovery - can be used via OVA file deployment to vSphere
    3. Agent-based discovery collects detailed information of VMs on both linux and windows OS.
 
@@ -2083,7 +2083,7 @@ You can migrate large dataset using DMS with AWS snowball.
 ---
 ## Front-End Web and Mobile
 
-### Summary
+### Chatper Summary
 1. just few of these services are currently on exam
 2. focus on Amzon pinpoint
   1. it enables you to engage with customers on large or small scale
@@ -2112,6 +2112,9 @@ for questions related to marketing compaigns, user engagements, and sending emai
 
 ### Summary
 focus 2 services, Rekognition and Segemaker
+
+Rekognition - if you have a scenario question about content moderation using AL.ML
+
 
 
 ### Analyzing Text using Amazon Comprehend, amazon Kendra, and Amazon Textract
