@@ -1928,26 +1928,39 @@ the 6 pillars (important)
 ## Migration
 
 ### Summary
-1. Snow Family
+
+try to answer those 4 question
+
+1. where are we going? src? destination
+2. how do we get there?
+3. is it all at once? partial migration?
+
+
+**Snow Family**
    1. snowcone and snowmobile (ignore)
    2. when to use snowball? - best used in situation where you have slow to no internet. Snowball is faster and more secure in these situations
-2. Storage GW
+   3. are perfect for moving many terabytes of data
+**Storage GW**
    1. hybrid - anythime on-premises storage is brought up. think "which version of storage GW could complement this"
    2. out of space? - File GW is the perfect solution if you local network attached storage is full.
    3. it's a VM - Storage GW is run locally as VM on-premises  
-3. DataSync and Transfer Family
+
+**DataSync and Transfer Family**
    1. DataSync is an agent-based solution that excels at **one-time** migrations of file shared into AWS.
-   2. EFS and FSx - are both viable locations for DataSync to transfer content into (!remober which one you would use for your particular operating system)
-   3. Transfer Family - allows you to use legacy file transfer protocols to give older applications the ability to read and write from S3
-4. Migration Hub
+   2. EFS and FSx - are both viable locations for DataSync to transfer content into (!Remember which one you would use for your particular operating system, linux and windows)
+   3. Transfer Family - allows you to use legacy file transfer protocols (SFTP) to give older applications the ability to read and write from S3
+   
+**Migration Hub**
    1. migration hub - gives you a way to organize all your migration steps, however you will need other tools to complete the migration, migration hub only helps you organize and track
-   2. DMS, is go-to tool for any sort of database migration (SCT)
+   2. DMS, is go-to tool for any sort of database migration, and remember the powerfule took known as AWS Schema Conversion Tool (SCT)
    3. do you have VMs? server migration service is the tool you will want to use to migrate out of data center and into AWS.
-5. Application Deiscovery Service
+
+**Application Deiscovery Service**
    1. Quickly migrate entire applications to AWS Cloud
    2. Agentless discovery - can be used via OVA file deployment to vSphere
    3. Agent-based discovery collects detailed information of VMs on both linux and windows OS.
-6. Application Migration Service
+
+**Application Migration Service**
    1. Known as MGN
    2. automated lift-and-shift service for migration infrastructure to AWS
    3. Replicates source servers (VM, physical, or Azure VM) into AWS for non-disruptive cutovers
