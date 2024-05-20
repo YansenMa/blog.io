@@ -107,6 +107,7 @@ tags: aws
   - [Using AWS X-Rays for Application Insights](#using-aws-x-rays-for-application-insights)
   - [Deploying GraphQL Interfaces in AWS AppSync](#deploying-graphql-interfaces-in-aws-appsync)
 - [Security](#security)
+  - [Chapter Summary](#chapter-summary-10)
   - [DDos](#ddos)
   - [Logging API Calls with cloudtrail](#logging-api-calls-with-cloudtrail)
   - [Shield](#shield)
@@ -123,6 +124,7 @@ tags: aws
   - [Audit Manager](#audit-manager)
   - [Artifact](#artifact)
   - [Amazon Cognito (important)](#amazon-cognito-important)
+  - [Amazon Detective (distrctor)](#amazon-detective-distrctor)
   - [Network firewall](#network-firewall)
   - [Secuirty Hub](#secuirty-hub)
 - [Automation](#automation)
@@ -1255,7 +1257,6 @@ Amazon OpenSearch Service loves logs
 ---
 ## Serverless Architecture
 
-
 ### Chapter Summary
 * Lambda 
   * lambda loves roles, whenever you're taling about credentials and lambda, ensure your're attaching a role to the function
@@ -1278,6 +1279,7 @@ Amazon OpenSearch Service loves logs
   * AWS Lmabda or API GW insights: AWS X-Ray integrates natively with these services and can easily help you gain deeper insights and understanding of your workloads requests and responses
 * AppSync
   * Managed GraphQL, question about this managed GraphQL, then AppSync
+
 ### Lambda
 limitations:
 1. 1000 concurrent executions
@@ -1421,6 +1423,33 @@ AppSync - Real-Time Data Sync Using GraphQL for Mobile & Web Apps, Online or Off
 
 ---
 ## Security
+
+### Chapter Summary
+* DDos [here](#ddos)
+  * distibuted denial of service (DDos), attack attempts to make your website or application unavailable to your end users.
+  * Common DDosS attacks include Layer 4 attachs such as SYN floods or NTP amplification attacks
+  * Common Layer 7 attacks include floods of GET/POST requests.
+* CloudTail - Remember CloudTrail is basically just CCTV for your AWS account. it logs all API calls made to your AWS account and stores these logs in S3.
+* Shield Protects Againset Layer 3 and Layer 4 only. 
+  * Remember what `Shield` is at a high-level and that it's used to protect against DDoS. if you see a scenario question talking about DDoS mitigation or protection against Layer 3 and 4 attacks. think AWS Shield
+  * Free or advanced 3000 usd per month
+* WAF
+  * allow all requests except the ones you specify
+  * block all requests except the ones you specify
+  * count the request that match the properties you specify
+  * Layer 7 DDoS, SQL injections and cross-site scripting 
+* AWS Firewall manager - if you see a scenario about multiple AWS accounts and resources that need to be secured centrally, use this !!
+* GuardDuty 
+  * what is guardduty? what it allows you todo?
+  * uses AI to learn what normal behavior looks like
+* Macie
+  * what is Macie and what allows you todo?
+  * use AI to analyze data in S3
+  * preventing identity theft
+  * if you see any scenario-based question where it's talking about anylyzing S3 using AI and preventing the leak of personally identifiable information
+* Inspector - it's used to perform vulnerability scan on both Ec2 instance (host assessments) and VPCs (network assessments)
+
+
 ### DDos
 
 ***What is a DDos Attack?**   
@@ -1540,7 +1569,7 @@ How it works:
 3. device <-> AWS Cloud (access AWS services using credentials)
 
 
-[<64;60;21M### Amazon Detective (distrctor)
+### Amazon Detective (distrctor)
 Detective operates across multiple AWS services and analyzes the `root cause` of an event.   
 Do not confuse this with Inspector, which is an automated vulnerability management service that continually scans EC2 and container workloads for sw vulnerabilites and unintended network exposure.
 Detective can be distractor
