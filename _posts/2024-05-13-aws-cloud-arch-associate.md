@@ -798,10 +798,11 @@ how to migrating mongoDB from on-premises to AWS
   > route table, network ACLs and security group have been created
 
   > security group can't span VPCs.
+
   2. create subnet
-    1. go to subnets -> create subnets
-    2. name it, select the VPC creted in step 1, select availability zone and IPv4 CIDR block
-    3. click on Create
+      1. go to subnets -> create subnets
+      2. name it, select the VPC creted in step 1, select availability zone and IPv4 CIDR block
+      3. click on Create
   > By default, no subnet has public IP. in order to do this, select the subnet and click on actions and make it auto apply public IP
 
   > Amazon always reserve 5 IP addresses with your subnets.
