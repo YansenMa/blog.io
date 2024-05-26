@@ -447,6 +447,35 @@ aws s3 cp ${your_file} s3://${bucket_name}
 4. all inbound traffic is blocked by default
 5. all outbound traffic is allowed
 6. we cannot configure with deny rules, only allows rules (to block IP addresses, we nned to use Network Access Control List (ACL))
+7. security goups are stateful = if you send a request from your instance, the response traffic for that request is allowed to flow in regardless of inbound security group rules
+
+
+for 3,
+
+Suppose you have three EC2 instances:
+
+    Web Server 1
+    Web Server 2
+    Database Server
+
+You might have the following security groups:
+
+    SG-Web: Allows HTTP (port 80) and HTTPS (port 443) traffic.
+    SG-SSH: Allows SSH (port 22) traffic.
+    SG-DB: Allows database traffic on port 3306.
+
+You can configure the instances as follows:
+
+    Web Server 1: Attach SG-Web and SG-SSH.
+    Web Server 2: Attach SG-Web and SG-SSH.
+    Database Server: Attach SG-DB and SG-SSH.
+
+In this configuration:
+
+    Both Web Server 1 and Web Server 2 can accept HTTP, HTTPS, and SSH traffic.
+    The Database Server can accept database and SSH traffic.
+    SG-Web and SG-SSH are shared across multiple instances, simplifying management.
+
 
 
 **Bootstrap Scripts** - A script that runs when the instance first runs. here is an example
@@ -502,8 +531,15 @@ placement groups - a logical grouping of EC2 instances.
 
 1. Cluster Placement Group - `Grouping of instances within a single AZ`, Recommended for applications that need low network latency, high network throughput, or both. Fact, only certain instance types can be lauched into a cluster placement group.
 	> keys: low network latency , high network throughput.
+
+![vpc](https://github.com/YansenMa/image-hosting-repo/raw/main/ec2-cluster-placement-group.png)
+
 2. Spread Placement Group - a group of instances that are `each placed on distinct underlying hardware.`, Spread placement groups are recommended for applications that have a small number of critical instances that should be kept seperate from each other, used for individual instances. 
 	> keys: individual critical EC2 instances
+
+
+![vpc](https://github.com/YansenMa/image-hosting-repo/raw/main/ec2-spread-placement-group.png)
+
 3. Partition Placement Group - each partition placement group has its own set of racks. Each rack has its own network and power source. No 2 partitions within a placement group share the same racks, allowing you to isolate the impace of hardwre failure within your application. Used for multiple instances.
 	> keys: multiple EC2 instances; HDFS, HBase and Cassandra
 
