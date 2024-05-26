@@ -787,6 +787,8 @@ how to migrating mongoDB from on-premises to AWS
 
 ### Chapter Summary
 
+draw the architect structure, and know the relation between them.
+
 ```bash
 +---------------------------------------------------------------+
 |                              VPC                              |
@@ -861,6 +863,16 @@ how to migrating mongoDB from on-premises to AWS
 * AWS PrivateLink [here](#network-privacy-with-aws-privatelink)
 * AWS Transit GW - if you see a question about simplifying network topology, or they're talking about IP multicasting, think of Transit GW
 * AWS Wavelength - if you see a scenario question about 5G, increasing application speed at edge using mobile networks, think AWS Wavelength
+    
+* relation between subnet, route table and ACLs
+    * Route Table:
+        1. Each subnet can be associated with only one route table at a time.
+        2. However, one route table can be associated with multiple subnets.
+
+    * Network ACL (NACL):
+        1. Each subnet can be associated with only one NACL at a time.
+        2. However, one NACL can be associated with multiple subnets.
+
 * How to setup your VPC?
   1. create VPC
       1. Go to VPC service in the AWS console, your VPC, create VPC
@@ -899,6 +911,7 @@ how to migrating mongoDB from on-premises to AWS
      2. Select the VPC, type `All ICMP` (protocol ICMP) and the source the public subnet
      3. Select the VPC, type `SSH` and the source the private subnet
      4. Change the security group of our EC2 instance
+
 
 ### Overview
 ![vpc](https://github.com/YansenMa/image-hosting-repo/raw/main/vpc.png)
