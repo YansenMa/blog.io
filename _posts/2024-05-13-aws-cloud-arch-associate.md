@@ -575,7 +575,7 @@ Storage volumes you can attach to your EC2 intances
   * volumes exist on EBS, whereas snapshot exits on S3
   * snapshots are point-in-time photographs of volumes and are incremental in nature
   * the 1st snapshot will take some time to create. For consistent snapshots, stop the instance and detach the volume
-  * you can share snapshots between AWS accounts as well as between regions. but first you nedd to copy that snapshot to the target region
+  * you can share snapshots between AWS accounts as well as between regions. but first you need to copy that snapshot to the target region
   * you can resize EBS volumes on the fly as well as changing the volume types.
 * EBS v.s Instance Store
   1. Intance store volumes are sometimes called `ephemeral storage` (data only persists for the lifetime of the instance it's attached to)
@@ -786,6 +786,42 @@ how to migrating mongoDB from on-premises to AWS
 ## Virtual Private Cloud (VPC) Networking
 
 ### Chapter Summary
+
+```bash
++---------------------------------------------------------------+
+|                              VPC                              |
+|                                                               |
+|  +-------------------+      +-------------------+             |
+|  |   Public Subnet   |      |   Private Subnet  |             |
+|  |                   |      |                   |             |
+|  |  +-------------+  |      |  +-------------+  |             |
+|  |  |   EC2       |  |      |  |   EC2       |  |             |
+|  |  |  Web Server |  |      |  |  App/DB     |  |             |
+|  |  +-------------+  |      |  +-------------+  |             |
+|  |  |   ALB       |  |      |                   |             |
+|  |  +-------------+  |      |                   |             |
+|  |  (SG: Web SG)   |      |                   |             |
+|  |                   |      |                   |             |
+|  +-------------------+      +-------------------+             |
+|  Public Route Table          Private Route Table              |
+|        |                          |                           |
+|        | Internet Gateway          | NAT Gateway              |
+|        +-------------------+  +-------------------+            |
+|                                                               |
++---------------------------------------------------------------+
+                  |                          
+                  |                          
+                  |                          
+            +-------------+
+            |   Clients   |
+            +-------------+
+                  |
+            +-------------+
+            |   Internet  |
+            +-------------+
+
+```
+
 * Basics
   * Think of VPC as a logical data center in AWS
   * Consists of  
