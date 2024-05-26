@@ -565,7 +565,7 @@ Storage volumes you can attach to your EC2 intances
   * EBS Volumes - Persistent storage for EC2 instance
   * Instance Store - Ephemeral storage for EC2 instances.
   * FSx for windows - File storage for Windows instances. Centrialized storage solution across multiple AZs.
-* EBS is persistent storage volumes for EC2
+* (Amazon Elastic Block Storage) EBS is persistent storage volumes for EC2
 * You can create an EBS volume as **encrypted** and then also any `snapshot` taken of that volume will therefore be encrypted as well.
 * how to encrypt volumes? (important), [here](#ebs-ecryption)
 * Types of EBS
