@@ -872,7 +872,23 @@ draw the architect structure, and know the relation between them.
     * Network ACL (NACL):
         1. Each subnet can be associated with only one NACL at a time.
         2. However, one NACL can be associated with multiple subnets.
-
+* knows which are subnet level configuration and vpc level configuration
+  * subnet level: 
+    * route table
+    * acls
+  * vpc level
+    * VPC CIDR Block
+    * Internet Gateway (IGW)
+    * NAT Gateway
+    * DNS settings
+    * DHCP Options Set
+  * EC2 level
+    * Security Groups (SGs)
+    * Elastic IP Addresses (EIPs)
+    * Private IP Addresses
+    * Public IP Addresses
+    * Network Interfaces (ENIs)
+    * Elastic Load Balancing (if applicable)
 * How to setup your VPC?
   1. create VPC
       1. Go to VPC service in the AWS console, your VPC, create VPC
