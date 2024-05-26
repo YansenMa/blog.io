@@ -792,9 +792,11 @@ draw the architect structure, and know the relation between them.
 ```bash
 +---------------------------------------------------------------+
 |                              VPC                              |
+|                       (CIDR: 10.0.0.0/16)                     |
 |                                                               |
 |  +-------------------+      +-------------------+             |
 |  |   Public Subnet   |      |   Private Subnet  |             |
+|  |   (NACL: Public)  |      |   (NACL: Private) |             |
 |  |                   |      |                   |             |
 |  |  +-------------+  |      |  +-------------+  |             |
 |  |  |   EC2       |  |      |  |   EC2       |  |             |
@@ -802,13 +804,16 @@ draw the architect structure, and know the relation between them.
 |  |  +-------------+  |      |  +-------------+  |             |
 |  |  |   ALB       |  |      |                   |             |
 |  |  +-------------+  |      |                   |             |
-|  |  (SG: Web SG)   |      |                   |             |
+|  |  (SG: Web SG)   |      |  (SG: App/DB SG)  |             |
+|  |  (EIP: 54.xx.xx.xx)|      |                   |             |
 |  |                   |      |                   |             |
 |  +-------------------+      +-------------------+             |
 |  Public Route Table          Private Route Table              |
 |        |                          |                           |
 |        | Internet Gateway          | NAT Gateway              |
-|        +-------------------+  +-------------------+            |
+|        +-------------------+  +-------------------+           |
+|                                                               |
+|   API Gateway (Public)                                        |
 |                                                               |
 +---------------------------------------------------------------+
                   |                          
