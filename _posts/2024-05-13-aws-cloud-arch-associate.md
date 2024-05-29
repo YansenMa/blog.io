@@ -1004,16 +1004,28 @@ if you have multiple sites, and each with its own VPN connection, you can use AW
 ## Route 53
 Route 53 is Amazon's DNS Service.
 
+* Elastic Load Balancers don't have pre-defined IPv4 addresses, you resolve to them using a DNS name.
+
 DNS record types:
 1. SOA Records
 2. CNAME records
 3. NS Records (Name server records)
 4. A records - fundamental type of DNS record, to translate the name of the domain to an IP address.
 
-
 CNAME v.s Alias record 
 * CCNAME - can be used to resolve one domain name to another. cannot be used for naked domain names.
+  * The **CNMAE** record maps a name to another name. It should only be used when there are no other records on that name. Use a CNAME record if you want to alias one name to another.
 * Alias Records - work like CNAME, but alias records are used to map resource record in your hosted zone to AWS resources always choose an alias record over a cname.
+  * The **ALIAS** record maps a name to another name. but can co-exit with other records on that name. Use an **ALIAS** record if you are trying to alias the root domain (apex zone)
+
+**Register a New Domain**
+1. go to Route53 -> register domain
+2. search for your domain
+3. fill out the registrant contact
+4. purchase your new domain 
+
+it takes some time to register the domain, between a few hours up to 3 days.
+
 
 > ![vpc_link](https://github.com/YansenMa/image-hosting-repo/raw/main/Rout53-simple-routing-policy.png)
 
