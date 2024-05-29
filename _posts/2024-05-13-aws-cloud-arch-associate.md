@@ -1015,8 +1015,14 @@ DNS record types:
 CNAME v.s Alias record 
 * CCNAME - can be used to resolve one domain name to another. cannot be used for naked domain names.
   * The **CNMAE** record maps a name to another name. It should only be used when there are no other records on that name. Use a CNAME record if you want to alias one name to another.
+  * points a hostname to any other hostname (app.domain.com => another.domain2.com)
+  * ONLY FOR NON-ROOT DOMAIN
 * Alias Records - work like CNAME, but alias records are used to map resource record in your hosted zone to AWS resources always choose an alias record over a cname.
   * The **ALIAS** record maps a name to another name. but can co-exit with other records on that name. Use an **ALIAS** record if you are trying to alias the root domain (apex zone)
+  * points a hostname to an AWS Service (app.domain.com => blabla.amazonaws.com)
+  * WORKS FOR ROOT DOMAIN AND NON ROOT DOMAIN 
+  * native health check
+  
 
 **Register a New Domain**
 1. go to Route53 -> register domain
