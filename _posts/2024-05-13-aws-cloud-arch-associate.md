@@ -1042,7 +1042,7 @@ it takes some time to register the domain, between a few hours up to 3 days.
 3. Failover routing policy  
    * are used when you want to create an primary/secondary setup
 4. Geolocation routing policy
-   * letts you choose where your traffic will be sent based on the geographic location of your users 
+   * lets you choose where your traffic will be sent based on the geographic location of your users 
 5. Geoproximity routing policy 
    * Traffic Flow only
    * lets Amazon Route 53  route traffic to your resources based on the geographic location of your users and your resources
@@ -1061,7 +1061,7 @@ it takes some time to register the domain, between a few hours up to 3 days.
 2. know what is Sticky Sessions, and use case
    1. Sticker sessions enable your users to stick to the same EC2 instance, can be useful if you are storing information locally to that instance
    2. you may see a scenario-based question where you remove an EC2 instance from a pool, but the load balancer continues to direct traffic to that EC2 instance, solution is to disable the sticky sessions
-   3. you can enable sticky sessions for ALB as wll, but the traffic will be sent at the target group level.
+   3. you can enable sticky sessions for ALB as well, but the traffic will be sent at the target group level.
 
 ### Application LB
 Best suited for load balancing of HTTP and HTTPS traffic. They operate at layer 7 and are application-aware, and intelligent LB.
