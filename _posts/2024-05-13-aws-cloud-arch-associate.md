@@ -644,7 +644,7 @@ how to encrypt volumes
 
 
 #### EC2 Hibernation
-1. ECw hibernation perserves the in-memory RAM on persistent storage (EBS)
+1. EC2 hibernation perserves the in-memory RAM on persistent storage (EBS)
 2. much faster to boot up because you do not need to reload the operating system
 3. Instanct RAM must be less than 150GB
 4. Instances can't be hibernated for more than 60 days.
@@ -1069,7 +1069,7 @@ Best suited for load balancing of HTTP and HTTPS traffic. They operate at layer 
 * **Rules** - Determine how the load balancer routes requests to its registered targets, Each rule consists of a priority, one or more actions, and one or more conditiions
 * **Target Group** - each target group routes requests to one or more registered targets, such as EC2 instances, using the protocol and port number you specify.
 * **Limitation**: ALBs only support HTTP and HTTPS. 
-* **HTTPS** to use an https listener, you must deploy at least one SSL/TLS server certificate on your load balancer. The load balancer uses a server certificate to terminate the frontend connection and then decrypt requests from clients before sending them to the targets.
+* **HTTPS** to use an https listener, you must deploy at least one SSL/TLS server certificate on your load balancer. The load balancer uses a ser/before sending them to the targets.
 
 ### Network LB
 Operating at the connection level (Layer 4) NLBs are capable of handling millions of requests per second, while maintaining ultra-low latencies. and Perfornace LB.
@@ -1179,6 +1179,7 @@ if you are asked to create a highly avlb solution for that legacy resource where
   3. `know the defaults`, it's important to understand the standard values for all SQS settings.
   4. `Nothing lasts forever`, messages stored in SQS can only persist up to 14 days.
   5. if the msg ordering important, make sure to select SQS FIFO
+
 2. SNS
    1. proactive notification -> SNS
    2. cloudwatch loves SNS
@@ -2060,11 +2061,17 @@ try to answer those 4 question
 2. how do we get there?
 3. is it all at once? partial migration?
 
+* data migration? 
+* rdb imgration?
+* file imgration?
+* application imgration?
+* imgration monitoring tool?
 
 **Snow Family**
    1. snowcone and snowmobile (ignore)
    2. when to use snowball? - best used in situation where you have slow to no internet. Snowball is faster and more secure in these situations
    3. are perfect for moving many terabytes of data
+
 **Storage GW**
    1. hybrid - anythime on-premises storage is brought up. think "which version of storage GW could complement this"
    2. out of space? - File GW is the perfect solution if you local network attached storage is full.
@@ -2205,6 +2212,7 @@ You can migrate large dataset using DMS with AWS snowball.
 ### Migration hub + server migration service (SMS)
 1. scenario-based questions related to tracking and planning migration efforts from either on-premises or another cloud vendor could involve Migration Hub.
 2. SMS is perfect for scenario like simplifying migrations of critical VMs from on-premises, easily migrating VMs from other cloud providers and **minimizing downtimes** during cutovers.
+
 ---
 ## Front-End Web and Mobile
 
@@ -2238,7 +2246,7 @@ for questions related to marketing compaigns, user engagements, and sending emai
 ### Summary
 focus 2 services, Rekognition and Segemaker
 
-Rekognition - if you have a scenario question about content moderation using AL.ML
+Rekognition - if you have a scenario question about content moderation using AL/ML
 
 
 
