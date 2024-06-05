@@ -829,6 +829,24 @@ draw the architect structure, and know the relation between them.
 
 ```
 
+
+
+```bash
+
+Incoming Traffic Flow:
+[Internet] -> [Public Subnet NACL Inbound Rules] -> [Route Table] -> [Instance]
+
+Outgoing Traffic Flow (Public Subnet):
+[Instance] -> [Route Table] -> [Public Subnet NACL Outbound Rules] -> [Internet Gateway] -> [Internet]
+
+Outgoing Traffic Flow (Private Subnet):
+[Instance] -> [Route Table] -> [NAT Gateway] -> [Private Subnet NACL Outbound Rules] -> [Internet]
+
+Incoming Traffic Flow (Private Subnet):
+[Internet] -> [NAT Gateway] -> [Private Subnet NACL Inbound Rules] -> [Route Table] -> [Instance]
+
+```
+
 * Basics
   * Think of VPC as a logical data center in AWS
   * Consists of  
