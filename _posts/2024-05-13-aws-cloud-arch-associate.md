@@ -636,6 +636,9 @@ Storage volumes you can attach to your EC2 intances
 
 
 #### EBS Ecryption
+* you can encrypt all EBS instance type 
+* you cannot encrypt an existing EBS
+
 how to encrypt volumes
 1. `create a snapshot` of the unencrypted root device volume
 2. create a `copy` of the snapshot and select the `encrypt option`
