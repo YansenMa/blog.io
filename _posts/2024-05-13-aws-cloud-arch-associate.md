@@ -221,6 +221,20 @@ Key Services to Know
 4. API GW
 5. AWS Global Accelerator
 
+
+
+### Regions v.s Zones
+Regions
+
+    Definition: A region is a geographical area that contains multiple, isolated locations known as Availability Zones.
+    Example: us-east-1 is the AWS region called US East (N. Virginia).
+
+Availability Zones (AZs)
+
+    Definition: Availability Zones are distinct locations within a region that are engineered to be isolated from failures in other Availability Zones.
+    Naming: Availability Zones are identified by appending a letter to the region code. For example, in the us-east-1 region, the Availability Zones might be named us-east-1a, us-east-1b, us-east-1c, us-east-1d, etc.
+
+
 ---
 ## (IAM) Identity and Access Management 
 
@@ -564,6 +578,9 @@ Storage volumes you can attach to your EC2 intances
   * FSx for Lustre - File storage for high performance computing Linix file systems
   * EBS Volumes - Persistent storage for EC2 instance
   * Instance Store - Ephemeral storage for EC2 instances.
+    * Reboot: Data on instance store volumes is retained.
+    * Stop/Start: Data on instance store volumes is lost.
+    * Terminate: Data on instance store volumes is lost.
   * FSx for windows - File storage for Windows instances. Centrialized storage solution across multiple AZs.
 * (Amazon Elastic Block Storage) EBS is persistent storage volumes for EC2
 * You can create an EBS volume as **encrypted** and then also any `snapshot` taken of that volume will therefore be encrypted as well.
