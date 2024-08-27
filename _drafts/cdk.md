@@ -21,4 +21,19 @@ cdk bootstrap
 ## List the stacks in the CDK app
 cdk list
 
+## Deloy CDK stack
+cdk deploy
+
+## Delete the stack
+cdk destroy
+
+## Launch the CDK Doc
+cdk docs
+
+## Compare local and deployed stack
+cdk diff 
+
+## Generates CloudFormation templates
+cdk synth
+
 ```
