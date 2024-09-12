@@ -37,3 +37,11 @@ cdk diff
 cdk synth
 
 ```
+
+
+## Workflow
+
+1. Init - Project is created using the command line tool
+2. Boostrap - Creates needed AWS resources for CDK environment
+3. Synth - Generates CloudFormation templates from code
+4. Deploy - Templates are launced by CloudFormation
