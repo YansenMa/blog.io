@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Directory to store notes
+notesDir="$HOME/notes"
+
+# Create the directory if it doesn't exist
+mkdir -p "$notesDir"
+
+# Get the current year, month, date, and day of the week
+currentYear=$(date +%Y)
+currentMonth=$(date +%b)           # Short month name (e.g., Jan, Feb)
+currentYearMonth="$currentYear-$currentMonth" # Format: 2025-Jan
+currentDate=$(date +%Y-%b-%d)     # Format: 2025-Jan-03
+currentDay=$(date +%a)            # Day of the week (e.g., Mon, Tue, Fri)
+currentDateWithDay="$currentDate $currentDay" # e.g., 2025-Jan-03 Fri
+currentTime=$(date +%H:%M:%S)     # Format: HH:MM:SS
+
+# Filename for the current year
+noteFilename="$notesDir/$currentYear.md"
+
+# Check if the file exists; if not, create it
+if [ ! -f "$noteFilename" ]; then
+  echo "" > "$noteFilename" # Create an empty file
+fi
+
+# Check if the year-month section exists; if not, add it
+if ! grep -q "## $currentYearMonth" "$noteFilename"; then
+  echo -e "\n## $currentYearMonth" >> "$noteFilename"
+fi
+
+# Check if the daily section exists; if not, add it
+if ! grep -q "### $currentDateWithDay" "$noteFilename"; then
+  echo -e "\n### $currentDateWithDay" >> "$noteFilename"
+fi
+
+
+# Open the note file with Neovim, positioned at the new line
+nvim +"norm Go" \
+     +"norm Go [ $currentTime ]" \
+     +"norm zz" \
+     +"norm G" + "$noteFilename"
