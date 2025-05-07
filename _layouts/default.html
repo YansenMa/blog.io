@@ -9,6 +9,17 @@
              | <a href="{% include relative %}{{ my_page.url | relative_url }}">{{ my_page.title }}</a>
             {% endif %}{% endfor %}
         </div>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-84PP3K7FZY"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-84PP3K7FZY');
+    </script>
+
         
     </header>
     <hr>
